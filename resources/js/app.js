@@ -1,2 +1,9 @@
 import './bootstrap';
-import 'alpinejs';
+
+import Alpine from 'alpinejs'
+import $ from 'jquery'
+
+window.Alpine = Alpine
+Alpine.start()
+
+window.jQuery = window.$ = $

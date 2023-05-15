@@ -12,8 +12,25 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'string', 'max:255', Rule::unique('users')->ignore(Auth::user())],
-            'password' => ['nullable', 'string', 'confirmed', 'min:8'],
+            'username' => ['required', 'string', 'max:255', Rule::unique('users', 'username')->ignore(Auth::user())],
+            'password' => ['nullable', 'string', 'confirmed'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'required' => 'O campo :attribute é obrigatório.',
+            'confirmed' => 'Os campos :attribute precisam ser idênticos.',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'nome',
+            'username' => 'usuário',
+            'password' => 'senha',
         ];
     }
 

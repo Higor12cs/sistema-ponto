@@ -1,16 +1,16 @@
 @extends('layouts.guest')
 
 @section('content')
-    <div class="col-lg-8">
+    <div class="col-10 col-lg-6">
         <div class="card-group d-block d-md-flex row">
-            <div class="card col-md-7 p-4 mb-0">
+            <div class="card col-md-7 p-3 mb-0">
                 <div class="card-body">
-                    <h1>{{ __('Login') }}</h1>
+                    <h3 class="mb-4">{{ __('Login') }}</h3>
                     <form action="{{ route('login') }}" method="POST">
                         @csrf
                         <div class="input-group mb-3"><span class="input-group-text">
                                 <svg class="icon">
-                                    <use xlink:href="{{ asset('icons/coreui.svg#cil-envelope-open') }}"></use>
+                                    <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
                                 </svg></span>
                             <input class="form-control @error('username') is-invalid @enderror" type="text"
                                 name="username" placeholder="{{ __('Usuário') }}" required autofocus>
@@ -20,7 +20,7 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="input-group mb-4"><span class="input-group-text">
+                        <div class="input-group mb-3"><span class="input-group-text">
                                 <svg class="icon">
                                     <use xlink:href="{{ asset('icons/coreui.svg#cil-lock-locked') }}"></use>
                                 </svg></span>
@@ -32,10 +32,10 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="icheck-primary" title="{{ __('Permanecer Conectado?') }}">
-                            <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                            <label for="remember">
+                        <div class="form-check mb-3">
+                            <input type="checkbox" class="form-check-input" name="remember" id="remember"
+                                {{ old('remember') ? 'checked' : '' }}>
+                            <label class="form-check-label" for="remember">
                                 {{ __('Permanecer Conectado?') }}
                             </label>
                         </div>
