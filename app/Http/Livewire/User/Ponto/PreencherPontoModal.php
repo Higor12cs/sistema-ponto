@@ -2,14 +2,14 @@
 
 namespace App\Http\Livewire\User\Ponto;
 
+use App\Http\Traits\HasModalTrait;
 use App\Http\Traits\SwalAlertsTrait;
-use App\Models\Funcionario;
 use App\Models\Ponto;
 use Livewire\Component;
 
 class PreencherPontoModal extends Component
 {
-    use SwalAlertsTrait;
+    use SwalAlertsTrait, HasModalTrait;
 
     public $apontamento;
     public $entrada1, $saida1;
@@ -17,8 +17,6 @@ class PreencherPontoModal extends Component
     protected $listeners = [
         'apontarFuncionario' => 'apontar',
     ];
-
-    public $funcionario;
 
     public function render()
     {
@@ -31,10 +29,7 @@ class PreencherPontoModal extends Component
         $this->entrada1 = $apontamento['pivot']['entrada1'];
         $this->saida1 = $apontamento['pivot']['saida1'];
 
-        $this->dispatchBrowserEvent('modal', [
-            'name' => 'apontamentoModal',
-            'action' => 'show',
-        ]);
+        $this->openModal('apontamentoModal');
     }
 
     public function salvar()
@@ -53,13 +48,9 @@ class PreencherPontoModal extends Component
             ]);
 
         $this->emit('funcionarioApontado');
-        $this->emitAlert('success', 'Funcionário apontado!');
+        $this->emitAlert('success', 'Informações atualizadas!');
 
-        $this->dispatchBrowserEvent('modal', [
-            'name' => 'apontamentoModal',
-            'action' => 'hide',
-        ]);
-
+        $this->closeModal('apontamentoModal');
         $this->reset();
     }
 }

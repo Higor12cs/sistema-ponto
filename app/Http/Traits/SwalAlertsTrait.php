@@ -2,9 +2,22 @@
 
 namespace App\Http\Traits;
 
+/**
+ * Trait SwalAlertsTrait
+ *
+ * This trait provides a method to emit Swal alerts.
+ */
 trait SwalAlertsTrait
 {
-    public function emitAlert(string $icon, string $title, string $text = '')
+    /**
+     * Emit a Swal alert.
+     *
+     * @param string $icon The icon for the alert.
+     * @param string $title The title of the alert.
+     * @param string $text The text of the alert (default: '').
+     * @return void
+     */
+    public function emitAlert(string $icon, string $title, string $text = ''): void
     {
         $this->dispatchBrowserEvent('swal', [
             'toast' => true,
