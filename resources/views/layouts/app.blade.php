@@ -89,12 +89,6 @@
     </div>
     <script src="{{ asset('js/coreui.bundle.min.js') }}"></script>
     @livewireScripts()
-
-    <script>
-        window.addEventListener('swal', function(e) {
-            Swal.fire(e.detail);
-        });
-    </script>
 </body>
 
 </html>

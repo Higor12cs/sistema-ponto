@@ -16,7 +16,7 @@ trait HasModalTrait
      * @param string $action The action to perform on the modal (default: 'open').
      * @return void
      */
-    public function openModal(string $name, string $action = 'open'): void
+    public function openModal(string $name, string $action = 'show'): void
     {
         $this->dispatchBrowserEvent('modal', [
             'name' => $name,

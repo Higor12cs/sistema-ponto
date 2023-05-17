@@ -35,8 +35,8 @@ class PreencherPontoModal extends Component
     public function salvar()
     {
         $this->validate([
-            'entrada1' => 'required',
-            'saida1' => 'required',
+            'entrada1' => ['nullable'],
+            'saida1' => ['nullable'],
         ]);
 
         $ponto = Ponto::findOrFail($this->apontamento['pivot']['ponto_id']);

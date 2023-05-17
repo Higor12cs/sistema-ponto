@@ -15,10 +15,4 @@
     </div>
 
     @livewire('user.ponto.preencher-ponto-modal')
-
-    <script>
-        window.addEventListener('modal', function(e) {
-            $('#' + e.detail.name).modal(e.detail.action);
-        });
-    </script>
 @endsection
