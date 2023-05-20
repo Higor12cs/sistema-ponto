@@ -5,12 +5,9 @@
         <h4>Funcionários</h4>
         <a href="{{ route('admin.funcionarios.create') }}" class="btn btn-primary">Cadastrar</a>
     </div>
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
-        </div>
-    @endif
+
+    <x-alerts />
+
     <div class="card mb-4">
         <div class="card-header">
             {{ __('Funcionários') }}

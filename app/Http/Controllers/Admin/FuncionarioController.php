@@ -15,9 +15,7 @@ class FuncionarioController extends Controller
      */
     public function index(): View
     {
-        $funcionarios = Funcionario::paginate(10);
-
-        return view('admin.funcionarios.index', compact('funcionarios'));
+        return view('admin.funcionarios.index');
     }
 
     /**

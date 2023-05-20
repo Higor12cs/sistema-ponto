@@ -2,6 +2,9 @@
 
 @section('content')
     <h4 class="mb-4">Pontos</h4>
+
+    <x-alerts />
+
     <div class="card mb-4">
         <div class="card-header">
             {{ __('Pontos') }}

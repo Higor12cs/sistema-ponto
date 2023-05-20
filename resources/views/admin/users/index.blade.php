@@ -1,32 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="d-flex justify-content-between mb-4">
+        <h4>Usuários</h4>
+        <a href="{{ route('admin.users.create') }}" class="btn btn-primary">Cadastrar</a>
+    </div>
+
+    <x-alerts />
+
     <div class="card mb-4">
         <div class="card-header">
             {{ __('Usuários') }}
         </div>
-
         <div class="card-body">
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($users as $user)
-                        <tr>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-
-        <div class="card-footer">
-            {{ $users->links() }}
+            @livewire('admin.users.users-table')
         </div>
     </div>
 @endsection

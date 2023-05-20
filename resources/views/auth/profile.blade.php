@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="d-flex justify-content-betewen mb-4">
+        <h4>Dados do Usuário</h4>
+    </div>
     <div class="card mb-4">
         <div class="card-header">
             {{ __('Meu Perfil') }}
@@ -16,10 +19,8 @@
                     <div class="alert alert-success" role="alert">{{ $message }}</div>
                 @endif
 
-                <div class="input-group mb-3"><span class="input-group-text">
-                        <svg class="icon">
-                            <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
-                        </svg></span>
+                <div class="mb-2">
+                    <label class="form-label">Nome</label>
                     <input class="form-control" type="text" name="name" placeholder="{{ __('Nome') }}"
                         value="{{ old('name', auth()->user()->name) }}" required>
                     @error('name')
@@ -29,10 +30,8 @@
                     @enderror
                 </div>
 
-                <div class="input-group mb-3"><span class="input-group-text">
-                        <svg class="icon">
-                            <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
-                        </svg></span>
+                <div class="mb-2">
+                    <label class="form-label">Usuário</label>
                     <input class="form-control" type="text" name="username" placeholder="{{ __('Usuário') }}"
                         value="{{ old('username', auth()->user()->username) }}" required>
                     @error('username')
@@ -42,10 +41,8 @@
                     @enderror
                 </div>
 
-                <div class="input-group mb-3"><span class="input-group-text">
-                        <svg class="icon">
-                            <use xlink:href="{{ asset('icons/coreui.svg#cil-lock-locked') }}"></use>
-                        </svg></span>
+                <div class="mb-2">
+                    <label class="form-label">Senha</label>
                     <input class="form-control @error('password') is-invalid @enderror" type="password" name="password"
                         placeholder="{{ __('Nova senha') }}" required>
                     @error('password')
@@ -55,10 +52,8 @@
                     @enderror
                 </div>
 
-                <div class="input-group mb-4"><span class="input-group-text">
-                        <svg class="icon">
-                            <use xlink:href="{{ asset('icons/coreui.svg#cil-lock-locked') }}"></use>
-                        </svg></span>
+                <div class="mb-4">
+                    <label class="form-label">Confirmação</label>
                     <input class="form-control @error('password_confirmation') is-invalid @enderror" type="password"
                         name="password_confirmation" placeholder="{{ __('Confirmação da nova senha') }}" required>
                 </div>

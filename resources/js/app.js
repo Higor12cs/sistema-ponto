@@ -15,3 +15,7 @@ window.addEventListener('modal', function (e) {
 window.addEventListener('swal', function (e) {
     Swal.fire(e.detail);
 });
+
+$("#bootstrap-alert").fadeTo(4000, 400).slideUp(400, function () {
+    $("#bootstrap-alert").slideUp(400);
+});

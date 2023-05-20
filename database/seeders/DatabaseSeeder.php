@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'password' => bcrypt('admin'),
             'is_admin' => true,
+            'password_on_login' => false,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'user',
             'password' => bcrypt('user'),
             'is_admin' => false,
+            'password_on_login' => false,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

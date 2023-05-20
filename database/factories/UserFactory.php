@@ -23,6 +23,7 @@ class UserFactory extends Factory
             'name' => $name,
             'username' => Str::snake($name),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password_on_login' => false,
             'is_admin' => fake()->boolean(10),
             'remember_token' => Str::random(10),
         ];

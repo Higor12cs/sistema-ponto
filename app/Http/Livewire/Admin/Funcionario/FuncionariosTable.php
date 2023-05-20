@@ -23,7 +23,8 @@ class FuncionariosTable extends DataTableComponent
         return [
             Column::make("Código", "id")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseOnTablet(),
             Column::make("Matrícula", "matricula")
                 ->sortable()
                 ->searchable(),
@@ -35,11 +36,13 @@ class FuncionariosTable extends DataTableComponent
                 ->hideIf(true),
             Column::make("Data Cadastro", "created_at")
                 ->sortable()
-                ->format(fn ($value) => $value->format('d/m/Y H:i')),
+                ->format(fn ($value) => $value->format('d/m/Y H:i'))
+                ->collapseOnTablet(),
             Column::make("Ativo")
                 ->label(
                     fn ($row) => $row->ativo == true ? '<span class="badge bg-success">Ativo</span>' : '<span class="badge bg-danger">Desativado</span>'
-                )->html(),
+                )->html()
+                ->collapseOnTablet(),
         ];
     }
 }

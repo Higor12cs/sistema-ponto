@@ -22,24 +22,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', fn () => redirect()->to('/login'));
+Route::get('/nova-senha', [UserController::class, 'newPassword'])->name('new-password.index');
+Route::post('/nova-senha', [UserController::class, 'setNewPassword'])->name('new-password.update');
 
-Auth::routes([
-    'login' => true,
-    'logout' => true,
-    'register' => false,
-    'reset' => false,
-    'confirm' => false,
-    'verify' => false,
-]);
-
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'password.check'])->group(function () {
 
     Route::middleware('is_admin')->prefix('/admin')->as('admin.')->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-        Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
         Route::resource('/funcionarios', FuncionarioController::class);
         Route::resource('/pontos', PontoController::class);
+        Route::resource('/users', UserController::class)->except('destroy');
+        Route::post('/users/redefinir-senha/{user}', [UserController::class, 'setToResetPassword'])->name('users.set-to-reset-password');
     });
 
     Route::middleware('is_user')->group(function () {
@@ -52,3 +46,12 @@ Route::middleware('auth')->group(function () {
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 });
+
+Auth::routes([
+    'login' => true,
+    'logout' => true,
+    'register' => false,
+    'reset' => false,
+    'confirm' => false,
+    'verify' => false,
+]);
