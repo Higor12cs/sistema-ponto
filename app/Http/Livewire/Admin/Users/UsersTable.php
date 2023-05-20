@@ -33,9 +33,16 @@ class UsersTable extends DataTableComponent
                 ->collapseOnTablet(),
             Column::make("is_admin")
                 ->hideIf(true),
+            Column::make("Tipo Usuário")
+                ->label(
+                    fn ($row) => $row->is_admin == true ? '<h6><span class="badge bg-success">Administrador</span></h6>' : '<h6><span class="badge bg-primary">Responsável</span></h6>'
+                )->html()
+                ->collapseOnTablet(),
+            Column::make("active")
+                ->hideIf(true),
             Column::make("Ativo")
                 ->label(
-                    fn ($row) => $row->is_admin == true ? '<h6><span class="badge bg-success">Ativo</span></h6>' : '<h6><span class="badge bg-danger">Desativado</span></h6>'
+                    fn ($row) => $row->active == true ? '<h6><span class="badge bg-primary">Ativo</span></h6>' : '<h6><span class="badge bg-danger">Inativo</span></h6>'
                 )->html()
                 ->collapseOnTablet(),
             Column::make("Data Cadastro", "created_at")

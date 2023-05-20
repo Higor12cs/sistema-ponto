@@ -22,29 +22,30 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', fn () => redirect()->to('/login'));
-Route::get('/nova-senha', [UserController::class, 'newPassword'])->name('new-password.index');
-Route::post('/nova-senha', [UserController::class, 'setNewPassword'])->name('new-password.update');
 
-Route::middleware(['auth', 'password.check'])->group(function () {
+Route::middleware(['auth', 'active.user'])->group(function () {
+    Route::get('/nova-senha', [UserController::class, 'newPassword'])->name('new-password.index');
+    Route::post('/nova-senha', [UserController::class, 'setNewPassword'])->name('new-password.update');
+});
 
+Route::middleware(['auth', 'password.check', 'active.user'])->group(function () {
     Route::middleware('is_admin')->prefix('/admin')->as('admin.')->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-
         Route::resource('/funcionarios', FuncionarioController::class);
         Route::resource('/pontos', PontoController::class);
         Route::resource('/users', UserController::class)->except('destroy');
         Route::post('/users/redefinir-senha/{user}', [UserController::class, 'setToResetPassword'])->name('users.set-to-reset-password');
+        Route::post('/users/ativo/{user}', [UserController::class, 'switchUserActiveStatus'])->name('users.switch-active-status');
     });
 
     Route::middleware('is_user')->group(function () {
         Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
-
         Route::get('/pontos', [UserPontoController::class, 'index'])->name('pontos.index');
         Route::get('/pontos/{ponto:id}/preencher', [UserPontoController::class, 'preencher'])->name('pontos.preencher');
     });
 
-    Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
-    Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 Auth::routes([

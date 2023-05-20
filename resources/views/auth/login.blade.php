@@ -39,6 +39,9 @@
                                 {{ __('Permanecer Conectado?') }}
                             </label>
                         </div>
+
+                        <x-alerts />
+
                         <div class="row">
                             <div class="col-6">
                                 <button class="btn btn-primary px-4" type="submit">{{ __('Login') }}</button>

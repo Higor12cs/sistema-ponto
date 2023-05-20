@@ -4,6 +4,14 @@
     <div class="d-flex justify-content-between mb-4">
         <h4>Editar Usuário</h4>
         <div class="d-flex">
+            <form action="{{ route('admin.users.switch-active-status', $user) }}" method="POST">
+                @csrf
+                @if (!$user->active)
+                    <button type="submit" class="btn btn-primary me-1">Ativar Usuário</button>
+                @else
+                    <button type="submit" class="btn btn-danger me-1">Desativar Usuário</button>
+                @endif
+            </form>
             <form action="{{ route('admin.users.set-to-reset-password', $user) }}" method="POST">
                 @csrf
                 <button
@@ -42,7 +50,7 @@
                     @endif
                 </div>
 
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="submit" class="btn btn-primary me-1">Salvar</button>
             </form>
         </div>
     </div>

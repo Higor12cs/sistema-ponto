@@ -98,4 +98,17 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')
             ->with('success', 'Usuário definido para restaurar sua senha no próximo login.');
     }
+
+    public function switchUserActiveStatus(User $user): RedirectResponse
+    {
+        if ($user->id == auth()->id()) {
+            return redirect()->route('admin.users.index')
+                ->with('danger', 'Um usuário não pode se desativar. Por favor, entre como outro usuário administrador para desativar esta conta.');
+        }
+
+        $user->active = !$user->active;
+        $user->save();
+
+        return redirect()->route('admin.users.index')->with('success', 'Status alterado com sucesso.');
+    }
 }

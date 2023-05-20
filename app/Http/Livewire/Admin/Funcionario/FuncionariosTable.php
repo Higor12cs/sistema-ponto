@@ -40,7 +40,7 @@ class FuncionariosTable extends DataTableComponent
                 ->collapseOnTablet(),
             Column::make("Ativo")
                 ->label(
-                    fn ($row) => $row->ativo == true ? '<span class="badge bg-success">Ativo</span>' : '<span class="badge bg-danger">Desativado</span>'
+                    fn ($row) => $row->ativo == true ? '<span class="badge bg-primary">Ativo</span>' : '<span class="badge bg-danger">Desativado</span>'
                 )->html()
                 ->collapseOnTablet(),
         ];
