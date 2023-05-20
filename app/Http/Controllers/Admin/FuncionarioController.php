@@ -42,9 +42,9 @@ class FuncionarioController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Funcionario $funcionario)
+    public function show(Funcionario $funcionario): View
     {
-        //
+        return view('admin.funcionarios.show', compact('funcionario'));
     }
 
     /**
@@ -68,8 +68,11 @@ class FuncionarioController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Funcionario $funcionario)
+    public function destroy(Funcionario $funcionario): RedirectResponse
     {
-        //
+        $funcionario->delete();
+
+        return redirect()->route('admin.funcionarios.index')
+            ->with('succcess', 'Funcionário excluído com sucesso.');
     }
 }

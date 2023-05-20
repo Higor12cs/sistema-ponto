@@ -12,16 +12,10 @@ class FuncionariosTable extends DataTableComponent
 
     public function configure(): void
     {
-        $this->setPrimaryKey('id');
-        $this->setTdAttributes(function (Column $column) {
-            if (in_array($column->getTitle(),  ['Ativo', 'Ações'])) {
-                return [
-                    'default' => false,
-                    'style' => 'width:50px',
-                ];
-            }
-            return [];
-        });
+        $this->setPrimaryKey('id')
+            ->setTableRowUrl(function ($row) {
+                return route('admin.funcionarios.show', $row);
+            });
     }
 
     public function columns(): array
@@ -45,14 +39,6 @@ class FuncionariosTable extends DataTableComponent
             Column::make("Ativo")
                 ->label(
                     fn ($row) => $row->ativo == true ? '<span class="badge bg-success">Ativo</span>' : '<span class="badge bg-danger">Desativado</span>'
-                )->html(),
-            Column::make('Ações')
-                ->label(
-                    function ($row) {
-                        $edit = '<a href="' . route('admin.funcionarios.edit', $row) . '" class="btn btn-secondary btn-sm me-1">Editar</a>';
-                        $delete = '<button class="btn btn-danger btn-sm">Excluir</button>';
-                        return '<div class="text-nowrap">' . $edit . $delete . '</div>';
-                    }
                 )->html(),
         ];
     }

@@ -3,7 +3,9 @@
 @section('content')
     <div class="d-flex justify-content-between mb-4">
         <h4>Editar Funcionário</h4>
-        <a href="{{ route('admin.funcionarios.index') }}" class="btn btn-secondary">Voltar</a>
+        <div class="d-flex">
+            <a href="{{ route('admin.funcionarios.show', $funcionario) }}" class="btn btn-secondary">Voltar</a>
+        </div>
     </div>
     <div class="card mb-4">
         <div class="card-header">
