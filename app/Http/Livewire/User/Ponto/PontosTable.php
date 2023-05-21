@@ -20,6 +20,10 @@ class PontosTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id')
+            ->setDefaultSort('data', 'asc')
+            ->setTableRowUrl(function ($row) {
+                return route('pontos.preencher', $row);
+            })
             ->setSearchDisabled()
             ->setTdAttributes(function (Column $column) {
                 if (in_array($column->getTitle(),  ['Ações'])) {
@@ -30,30 +34,18 @@ class PontosTable extends DataTableComponent
                 }
                 return [];
             });
-            // ->setTableRowUrl(fn ($row) => route('pontos.preencher', $row));
     }
 
     public function columns(): array
     {
         return [
             Column::make("Código", "id")
-                ->sortable()
-                ->collapseOnTablet(),
+                ->sortable(),
             Column::make("Responsável", "user.name")
-                ->sortable()
-                ->collapseOnTablet(),
+                ->sortable(),
             Column::make("Data", "data")
                 ->sortable()
                 ->format(fn ($value) => $value->format('d/m/Y')),
-            Column::make("Criado Em", "created_at")
-                ->sortable()
-                ->collapseOnTablet()
-                ->format(fn ($value) => $value->format('d/m/Y')),
-            Column::make('Ações')
-                ->label(
-                    fn ($row) => '<a href="' . route('pontos.preencher', $row) . '" class="btn btn-secondary btn-sm">Preencher</a>'
-                )
-                ->html(),
         ];
     }
 }

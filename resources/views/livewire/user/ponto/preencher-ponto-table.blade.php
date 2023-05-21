@@ -10,8 +10,17 @@
             @forelse ($funcionarios as $funcionario)
                 <tr>
                     <td>{{ $funcionario->nome }}</td>
-                    <td>{{ $funcionario->pivot->entrada1 }}</td>
-                    <td>{{ $funcionario->pivot->saida1 }}</td>
+                    <td>
+                        @if (!empty($funcionario->pivot->entrada1))
+                            {{ date('H:i', strtotime($funcionario->pivot->entrada1)) }}
+                        @endif
+                    </td>
+                    <td>
+                        @if (!empty($funcionario->pivot->saida1))
+                            {{ date('H:i', strtotime($funcionario->pivot->saida1)) }}
+                        @endif
+                    </td>
+
                     <td>
                         <button wire:click="$emit('apontarFuncionario', {{ $funcionario }})"
                             class="btn btn-sm btn-primary">Preencher</button>

@@ -33,6 +33,20 @@
     <div class="card mb-4">
         <div class="card-header">Importadores</div>
         <div class="card-body">
+            <p class="fw-bold">Considerações importantes:</p>
+            <div class="alert alert-primary pb-0">
+                <p><span class="fw-bold">Todos importadores</span> esperam arquivos .xls ou .xlsx. Qualquer outro tipo de arquivo
+                    será automaticamente <span class="fw-bold">recusado</span> pela regra de validação.</p>
+            </div>
+            <div class="alert alert-primary pb-0">
+                <p><span class="fw-bold">Todos importadores</span> esperam a primeira linha como cabeçalho. <span class="fw-bold">Somente a primeira
+                        linha.</span></p>
+            </div>
+            <div class="alert alert-primary pb-0">
+                <p>Em casos de celulas vazias, <span class="fw-bold">a importação irá falhar e todas alterações serão revertidas.</span></p>
+            </div>
+
+            <hr>
 
             <div class="d-flex justify-content-between">
                 <h5>Método 1 - Importação com data manual fixa</h5>
@@ -49,12 +63,12 @@
                     <th>Responsável</th>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr class="table-active">
                         <td>ABC1234</td>
                         <td>João</td>
                         <td>1</td>
                     </tr>
-                    <tr>
+                    <tr class="table-active">
                         <td>DEF567</td>
                         <td>José</td>
                         <td>1</td>
@@ -73,7 +87,7 @@
             </table>
 
             <p>Fornecendo os dados neste layout, o script automaticamente irá agrupar os responsáveis e criar as capas dos
-                pontos com a data informada manualmente no ato da importação.</p>
+                pontos com a data primaryrmada manualmente no ato da importação.</p>
             <p>Por exemplo, no cado de uma planilha importada com 50 funcionários (50 linhas), contendo 5 responsávies,
                 serão geradas 10 capas. E relacionadas a cada capa existirá 10 funcionários.</p>
 
@@ -94,12 +108,12 @@
                     <th>Data</th>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr class="table-active">
                         <td>ABC1234</td>
                         <td>João</td>
                         <td>01/01/2023</td>
                     </tr>
-                    <tr>
+                    <tr class="table-active">
                         <td>DEF567</td>
                         <td>José</td>
                         <td>01/01/2023</td>
@@ -116,12 +130,12 @@
                         <td>02/01/2023</td>
                     </tr>
 
-                    <tr>
+                    <tr class="table-active">
                         <td>ABC1234</td>
                         <td>João</td>
                         <td>03/01/2023</td>
                     </tr>
-                    <tr>
+                    <tr class="table-active">
                         <td>DEF567</td>
                         <td>José</td>
                         <td>03/01/2023</td>
@@ -129,10 +143,10 @@
                 </tbody>
             </table>
 
-            <p>Já neste layout, o usuário informará o responsável em que os pontos serão criados. Assim, o script
+            <p>Já neste layout, o usuário primaryrmará o responsável em que os pontos serão criados. Assim, o script
                 automaticamente irá gerar diversos pontos em diversas datas com os respectivos funcionários. Mas todos serão
                 atríbuídos ao mesmo responsável.</p>
-            <p>Neste exemplo, seriam criados 3 pontos para o responsável informado no ato da importação, um na data de
+            <p>Neste exemplo, seriam criados 3 pontos para o responsável primaryrmado no ato da importação, um na data de
                 01/01/2023, outro em 02/01/2023 e o último com data de 03/01/2023. Todos com dois responsáveis em cada
                 ponto.</p>
 
@@ -153,13 +167,13 @@
                     <th>Data</th>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr class="table-active">
                         <td>ABC1234</td>
                         <td>João</td>
                         <td>1</td>
                         <td>01/01/2023</td>
                     </tr>
-                    <tr>
+                    <tr class="table-active">
                         <td>DEF567</td>
                         <td>José</td>
                         <td>1</td>
@@ -178,13 +192,13 @@
                         <td>01/01/2023</td>
                     </tr>
 
-                    <tr>
+                    <tr class="table-active">
                         <td>ABC1234</td>
                         <td>João</td>
                         <td>1</td>
                         <td>02/01/2023</td>
                     </tr>
-                    <tr>
+                    <tr class="table-active">
                         <td>DEF567</td>
                         <td>José</td>
                         <td>1</td>
@@ -203,13 +217,13 @@
                         <td>02/01/2023</td>
                     </tr>
 
-                    <tr>
+                    <tr class="table-active">
                         <td>ABC1234</td>
                         <td>João</td>
                         <td>1</td>
                         <td>03/01/2023</td>
                     </tr>
-                    <tr>
+                    <tr class="table-active">
                         <td>DEF567</td>
                         <td>José</td>
                         <td>1</td>
@@ -230,8 +244,8 @@
                 </tbody>
             </table>
 
-            <p>Aqui o script automaticamente identifica todas as informações e cria os pontos, sem a necessidade de nenhuma
-                informação manual por parte do usuário.</p>
+            <p>Aqui o script automaticamente identifica todas as primaryrmações e cria os pontos, sem a necessidade de nenhuma
+                primaryrmação manual por parte do usuário.</p>
             <p>No exemplo acima, o script identificaria 6 pontos. O responsável 1 receberia pontos em 01/01/2023, 02/01/2023
                 e 03/01/2023, com dois funcionários em cada, assim como o responsável 2.</p>
 
@@ -282,8 +296,7 @@
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="{{ route('admin.importador.data-fixa') }}" method="POST"
-                    enctype="multipart/form-data">
+                <form action="{{ route('admin.importador.data-fixa') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalImportacaoDataFixaLabel">Importador (Data Fixa)</h5>
@@ -291,7 +304,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="data" class="form-label">Responsável</label>
+                            <label for="data" class="form-label">Data</label>
                             <input type="date" class="form-control" id="data" name="data">
                         </div>
 

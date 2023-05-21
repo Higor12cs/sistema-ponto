@@ -13,6 +13,7 @@ class FuncionariosTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id')
+            ->setDefaultSort('id', 'desc')
             ->setTableRowUrl(function ($row) {
                 return route('admin.funcionarios.show', $row);
             });

@@ -17,6 +17,7 @@ class PontosTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id')
+            ->setDefaultSort('pontos.id', 'desc')
             ->setTableRowUrl(function ($row) {
                 return route('admin.pontos.edit', $row);
             });
@@ -32,9 +33,9 @@ class PontosTable extends DataTableComponent
             Column::make("Data", "data")
                 ->sortable()
                 ->format(fn ($value) => $value->format('d/m/Y')),
-            // Column::make("Criado Em", "created_at")
-            //     ->sortable()
-            //     ->format(fn ($value) => $value->format('d/m/Y H:i')),
+            Column::make("Criado Em", "created_at")
+                ->sortable()
+                ->format(fn ($value) => $value->format('d/m/Y H:i')),
         ];
     }
 }

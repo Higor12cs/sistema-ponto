@@ -4,6 +4,9 @@
     <div class="d-flex justify-content-betewen mb-4">
         <h4>Dados do Usuário</h4>
     </div>
+
+    <x-alerts />
+
     <div class="card mb-4">
         <div class="card-header">
             {{ __('Meu Perfil') }}
@@ -14,10 +17,6 @@
             @method('PUT')
 
             <div class="card-body">
-
-                @if ($message = Session::get('success'))
-                    <div class="alert alert-success" role="alert">{{ $message }}</div>
-                @endif
 
                 <div class="mb-2">
                     <label class="form-label">Nome</label>

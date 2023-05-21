@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\Funcionario;
 use App\Models\Ponto;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
 class ImportadorPontoDataFixa implements ToCollection
@@ -19,6 +20,16 @@ class ImportadorPontoDataFixa implements ToCollection
 
     public function collection(Collection $rows)
     {
+        Validator::make($rows->toArray(), [
+            '*.0' => 'required',
+            '*.1' => 'required',
+            '*.2' => 'required',
+        ], [
+            '*.0.required' => 'O valor da célula :attribute é obrigatório. Todas matrículas são obrigatórias',
+            '*.1.required' => 'O valor da célula :attribute é obrigatório. Todos nomes são obrigatórios',
+            '*.2.required' => 'O valor da célula :attribute é obrigatório. Todas responsáveis são obrigatórios.',
+        ])->validate();
+
         $groupedRows = $rows->groupBy(2);
 
         $groupedRows->each(function ($rows, $responsavel) {
