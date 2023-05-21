@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table table-bordered table-hover table-striped">
+    <table class="table table-bordered table-hover">
         <thead>
             <th class="col-2">Código</th>
             <th class="col-5">Funcionário</th>

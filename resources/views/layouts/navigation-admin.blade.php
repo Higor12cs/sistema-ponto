@@ -17,6 +17,15 @@
         </a>
     </li>
 
+    <li class="nav-group" aria-expanded="false">
+        <a class="nav-link" href="{{ route('admin.importador.index') }}">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-cloud-upload') }}"></use>
+            </svg>
+            {{ __('Importador') }}
+        </a>
+    </li>
+
     <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.funcionarios.index') }}">
             <svg class="nav-icon">
@@ -36,7 +45,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('admin.relatorios.index') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-description') }}"></use>
             </svg>

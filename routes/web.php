@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\FuncionarioController;
+use App\Http\Controllers\Admin\ImportadorController;
 use App\Http\Controllers\Admin\PontoController;
+use App\Http\Controllers\Admin\RelatorioController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
@@ -31,11 +33,15 @@ Route::middleware(['auth', 'active.user'])->group(function () {
 Route::middleware(['auth', 'password.check', 'active.user'])->group(function () {
     Route::middleware('is_admin')->prefix('/admin')->as('admin.')->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-        Route::resource('/funcionarios', FuncionarioController::class);
         Route::resource('/pontos', PontoController::class);
+        Route::get('/importador', [ImportadorController::class, 'index'])->name('importador.index');
+        Route::post('/importador/importar/data-fixa', [ImportadorController::class, 'importarDataFixa'])->name('importador.data-fixa');
+        Route::post('/importador/importar/funcionario-fixo', [ImportadorController::class, 'importarFuncionarioFixo'])->name('importador.funcionario-fixo');
+        Route::resource('/funcionarios', FuncionarioController::class);
         Route::resource('/users', UserController::class)->except('destroy');
         Route::post('/users/redefinir-senha/{user}', [UserController::class, 'setToResetPassword'])->name('users.set-to-reset-password');
         Route::post('/users/ativo/{user}', [UserController::class, 'switchUserActiveStatus'])->name('users.switch-active-status');
+        Route::get('/relatorios', [RelatorioController::class, 'index'])->name('relatorios.index');
     });
 
     Route::middleware('is_user')->group(function () {
