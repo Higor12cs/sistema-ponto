@@ -44,32 +44,28 @@
         </a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.relatorios.index') }}">
+    <li class="nav-group" aria-expanded="false">
+        <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-description') }}"></use>
             </svg>
             {{ __('Relatórios') }}
         </a>
-    </li>
-
-    <li class="nav-group" aria-expanded="false">
-        <a class="nav-link nav-group-toggle" href="#">
-            <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-star') }}"></use>
-            </svg>
-            Two-level menu
-        </a>
         <ul class="nav-group-items" style="height: 0px;">
             <li class="nav-item">
-                <a class="nav-link" href="#" target="_top">
+                <a class="nav-link" href="{{ route('admin.relatorios.filtro.responsavel') }}" target="_top">
                     <svg class="nav-icon">
-                        <use xlink:href="{{ asset('icons/coreui.svg#cil-bug') }}"></use>
-                    </svg>
-                    Child menu
+                        <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
+                    </svg> Responsável
                 </a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.relatorios.filtro.funcionario') }}" target="_top">
+                    <svg class="nav-icon">
+                        <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
+                    </svg> Funcionário
+                </a>
+            </li>
         </ul>
 
     </li>

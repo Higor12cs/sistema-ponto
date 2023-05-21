@@ -41,7 +41,9 @@ Route::middleware(['auth', 'password.check', 'active.user'])->group(function () 
         Route::resource('/users', UserController::class)->except('destroy');
         Route::post('/users/redefinir-senha/{user}', [UserController::class, 'setToResetPassword'])->name('users.set-to-reset-password');
         Route::post('/users/ativo/{user}', [UserController::class, 'switchUserActiveStatus'])->name('users.switch-active-status');
-        Route::get('/relatorios', [RelatorioController::class, 'index'])->name('relatorios.index');
+        Route::get('/relatorios/responsavel', [RelatorioController::class, 'filtroPorResponsavel'])->name('relatorios.filtro.responsavel');
+        Route::get('/relatorios/funcionario', [RelatorioController::class, 'filtroPorFuncionario'])->name('relatorios.filtro.funcionario');
+        Route::post('/relatorios/responsavel', [RelatorioController::class, 'relatorioPorResponsavel'])->name('relatorios.responsavel');
     });
 
     Route::middleware('is_user')->group(function () {

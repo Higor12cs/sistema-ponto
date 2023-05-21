@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="d-flex justify-content-between mb-4">
-        <h4>Relatórios</h4>
+        <h4>Relatório por Funcionário</h4>
         <div class="d-flex">
         </div>
     </div>
@@ -11,10 +11,10 @@
 
     <div class="card mb-4">
         <div class="card-header">
-            {{ __('Relatórios') }}
+            {{ __('Relatório por Funcionário') }}
         </div>
         <div class="card-body">
-            <span>Relatorios</span>
+            <span>...</span>
         </div>
     </div>
 @endsection
