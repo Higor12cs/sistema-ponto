@@ -67,8 +67,8 @@
 
                 @forelse ($pontos as $ponto)
                     <div class="table-responsive">
-                        <table class="table table-light table-striped table-bordered">
-                            <thead>
+                        <table class="table table-striped table-bordered">
+                            <thead class="table-dark">
                                 <th>Ponto</th>
                                 <th>Responsável</th>
                                 <th>Data</th>
@@ -79,36 +79,36 @@
                                     <td class="col-2">{{ $ponto->data->format('d/m/Y') }}</td>
                                     <td class="col-8">{{ $ponto->user->name }}</td>
                                 <tr>
-                                    <td colspan="4">
-                                        <table class="table table-primary table-striped table-bordered table-hover">
-                                            <thead>
-                                                <th>Funcionario</th>
-                                                <th>Entrada</th>
-                                                <th>Saida</th>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($ponto->funcionarios as $funcionario)
-                                                    <tr>
-                                                        <td class="col-8">{{ $funcionario->nome }}</td>
-                                                        <td class="col-2">
-                                                            @if (!empty($funcionario->pivot->entrada1))
-                                                                {{ date('H:i', strtotime($funcionario->pivot->entrada1)) }}
-                                                            @else
-                                                                Não Preenchido
-                                                            @endif
-                                                        </td>
-                                                        <td class="col-2">
-                                                            @if (!empty($funcionario->pivot->saida1))
-                                                                {{ date('H:i', strtotime($funcionario->pivot->saida1)) }}
-                                                            @else
-                                                                Não Preenchido
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </td>
+                                <td colspan="4">
+                                    <table class="table table-success table-striped table-bordered table-hover">
+                                        <thead>
+                                            <th>Funcionario</th>
+                                            <th>Entrada</th>
+                                            <th>Saida</th>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($ponto->funcionarios as $funcionario)
+                                                <tr>
+                                                    <td class="col-8">{{ $funcionario->nome }}</td>
+                                                    <td class="col-2">
+                                                        @if (!empty($funcionario->pivot->entrada1))
+                                                            {{ date('H:i', strtotime($funcionario->pivot->entrada1)) }}
+                                                        @else
+                                                            Não Preenchido
+                                                        @endif
+                                                    </td>
+                                                    <td class="col-2">
+                                                        @if (!empty($funcionario->pivot->saida1))
+                                                            {{ date('H:i', strtotime($funcionario->pivot->saida1)) }}
+                                                        @else
+                                                            Não Preenchido
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </td>
                                 </tr>
                                 </tr>
                             </tbody>

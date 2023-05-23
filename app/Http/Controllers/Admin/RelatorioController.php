@@ -35,11 +35,8 @@ class RelatorioController extends Controller
         $users = User::where('is_admin', false)->get();
 
         $pontos = Ponto::where('user_id', $user_id)
+            ->where('finalizado', true)
             ->whereBetween('data', [$start_date, $end_date])
-            ->whereHas('funcionarios', function ($query) use ($user_id) {
-                $query->where('funcionarios.id', $user_id)
-                    ->with(['pivot' => ['entrada1', 'saida1']]);
-            })
             ->with(['funcionarios', 'user'])
             ->get();
 

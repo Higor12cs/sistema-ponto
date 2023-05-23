@@ -35,15 +35,18 @@
         <div class="card-body">
             <p class="fw-bold">Considerações importantes:</p>
             <div class="alert alert-primary pb-0">
-                <p><span class="fw-bold">Todos importadores</span> esperam arquivos .xls ou .xlsx. Qualquer outro tipo de arquivo
+                <p><span class="fw-bold">Todos importadores</span> esperam arquivos .xls ou .xlsx. Qualquer outro tipo de
+                    arquivo
                     será automaticamente <span class="fw-bold">recusado</span> pela regra de validação.</p>
             </div>
             <div class="alert alert-primary pb-0">
-                <p><span class="fw-bold">Todos importadores</span> esperam a primeira linha como cabeçalho. <span class="fw-bold">Somente a primeira
+                <p><span class="fw-bold">Todos importadores</span> esperam a primeira linha como cabeçalho. <span
+                        class="fw-bold">Somente a primeira
                         linha.</span></p>
             </div>
             <div class="alert alert-primary pb-0">
-                <p>Em casos de celulas vazias, <span class="fw-bold">a importação irá falhar e todas alterações serão revertidas.</span></p>
+                <p>Em casos de celulas vazias, <span class="fw-bold">a importação irá falhar e todas alterações serão
+                        revertidas.</span></p>
             </div>
 
             <hr>
@@ -56,35 +59,37 @@
 
             <p>Neste método, o programa espera o seguinte layout dentro do aqruivo:</p>
 
-            <table class="table table-bordered">
-                <thead>
-                    <th>Matrícula</th>
-                    <th>Nome</th>
-                    <th>Responsável</th>
-                </thead>
-                <tbody>
-                    <tr class="table-active">
-                        <td>ABC1234</td>
-                        <td>João</td>
-                        <td>1</td>
-                    </tr>
-                    <tr class="table-active">
-                        <td>DEF567</td>
-                        <td>José</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>GHI890</td>
-                        <td>Rafael</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>JKL123</td>
-                        <td>Carlos</td>
-                        <td>2</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <th>Matrícula</th>
+                        <th>Nome</th>
+                        <th>Responsável</th>
+                    </thead>
+                    <tbody>
+                        <tr class="table-active">
+                            <td>ABC1234</td>
+                            <td>João</td>
+                            <td>1</td>
+                        </tr>
+                        <tr class="table-active">
+                            <td>DEF567</td>
+                            <td>José</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>GHI890</td>
+                            <td>Rafael</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>JKL123</td>
+                            <td>Carlos</td>
+                            <td>2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <p>Fornecendo os dados neste layout, o script automaticamente irá agrupar os responsáveis e criar as capas dos
                 pontos com a data primaryrmada manualmente no ato da importação.</p>
@@ -99,49 +104,51 @@
                     data-coreui-target="#modalImportacaoResponsavelFixo">Importar Layout</button>
             </div>
 
-            <p>Neste método, o programa espera o seguinte layout dentro do aqruivo:</p>
+            <p>Neste método, o programa espera o seguint layout dentro do aqruivo:</p>
 
-            <table class="table table-bordered">
-                <thead>
-                    <th>Matrícula</th>
-                    <th>Nome</th>
-                    <th>Data</th>
-                </thead>
-                <tbody>
-                    <tr class="table-active">
-                        <td>ABC1234</td>
-                        <td>João</td>
-                        <td>01/01/2023</td>
-                    </tr>
-                    <tr class="table-active">
-                        <td>DEF567</td>
-                        <td>José</td>
-                        <td>01/01/2023</td>
-                    </tr>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <th>Matrícula</th>
+                        <th>Nome</th>
+                        <th>Data</th>
+                    </thead>
+                    <tbody>
+                        <tr class="table-active">
+                            <td>ABC1234</td>
+                            <td>João</td>
+                            <td>01/01/2023</td>
+                        </tr>
+                        <tr class="table-active">
+                            <td>DEF567</td>
+                            <td>José</td>
+                            <td>01/01/2023</td>
+                        </tr>
 
-                    <tr>
-                        <td>ABC1234</td>
-                        <td>João</td>
-                        <td>02/01/2023</td>
-                    </tr>
-                    <tr>
-                        <td>DEF567</td>
-                        <td>José</td>
-                        <td>02/01/2023</td>
-                    </tr>
+                        <tr>
+                            <td>ABC1234</td>
+                            <td>João</td>
+                            <td>02/01/2023</td>
+                        </tr>
+                        <tr>
+                            <td>DEF567</td>
+                            <td>José</td>
+                            <td>02/01/2023</td>
+                        </tr>
 
-                    <tr class="table-active">
-                        <td>ABC1234</td>
-                        <td>João</td>
-                        <td>03/01/2023</td>
-                    </tr>
-                    <tr class="table-active">
-                        <td>DEF567</td>
-                        <td>José</td>
-                        <td>03/01/2023</td>
-                    </tr>
-                </tbody>
-            </table>
+                        <tr class="table-active">
+                            <td>ABC1234</td>
+                            <td>João</td>
+                            <td>03/01/2023</td>
+                        </tr>
+                        <tr class="table-active">
+                            <td>DEF567</td>
+                            <td>José</td>
+                            <td>03/01/2023</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <p>Já neste layout, o usuário primaryrmará o responsável em que os pontos serão criados. Assim, o script
                 automaticamente irá gerar diversos pontos em diversas datas com os respectivos funcionários. Mas todos serão
@@ -159,92 +166,95 @@
 
             <p>Neste método, o programa espera o seguinte layout dentro do aqruivo:</p>
 
-            <table class="table table-bordered">
-                <thead>
-                    <th>Matrícula</th>
-                    <th>Nome</th>
-                    <th>Responsável</th>
-                    <th>Data</th>
-                </thead>
-                <tbody>
-                    <tr class="table-active">
-                        <td>ABC1234</td>
-                        <td>João</td>
-                        <td>1</td>
-                        <td>01/01/2023</td>
-                    </tr>
-                    <tr class="table-active">
-                        <td>DEF567</td>
-                        <td>José</td>
-                        <td>1</td>
-                        <td>01/01/2023</td>
-                    </tr>
-                    <tr>
-                        <td>GHI890</td>
-                        <td>Rafael</td>
-                        <td>2</td>
-                        <td>01/01/2023</td>
-                    </tr>
-                    <tr>
-                        <td>JKL123</td>
-                        <td>Carlos</td>
-                        <td>2</td>
-                        <td>01/01/2023</td>
-                    </tr>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <th>Matrícula</th>
+                        <th>Nome</th>
+                        <th>Responsável</th>
+                        <th>Data</th>
+                    </thead>
+                    <tbody>
+                        <tr class="table-active">
+                            <td>ABC1234</td>
+                            <td>João</td>
+                            <td>1</td>
+                            <td>01/01/2023</td>
+                        </tr>
+                        <tr class="table-active">
+                            <td>DEF567</td>
+                            <td>José</td>
+                            <td>1</td>
+                            <td>01/01/2023</td>
+                        </tr>
+                        <tr>
+                            <td>GHI890</td>
+                            <td>Rafael</td>
+                            <td>2</td>
+                            <td>01/01/2023</td>
+                        </tr>
+                        <tr>
+                            <td>JKL123</td>
+                            <td>Carlos</td>
+                            <td>2</td>
+                            <td>01/01/2023</td>
+                        </tr>
 
-                    <tr class="table-active">
-                        <td>ABC1234</td>
-                        <td>João</td>
-                        <td>1</td>
-                        <td>02/01/2023</td>
-                    </tr>
-                    <tr class="table-active">
-                        <td>DEF567</td>
-                        <td>José</td>
-                        <td>1</td>
-                        <td>02/01/2023</td>
-                    </tr>
-                    <tr>
-                        <td>GHI890</td>
-                        <td>Rafael</td>
-                        <td>2</td>
-                        <td>02/01/2023</td>
-                    </tr>
-                    <tr>
-                        <td>JKL123</td>
-                        <td>Carlos</td>
-                        <td>2</td>
-                        <td>02/01/2023</td>
-                    </tr>
+                        <tr class="table-active">
+                            <td>ABC1234</td>
+                            <td>João</td>
+                            <td>1</td>
+                            <td>02/01/2023</td>
+                        </tr>
+                        <tr class="table-active">
+                            <td>DEF567</td>
+                            <td>José</td>
+                            <td>1</td>
+                            <td>02/01/2023</td>
+                        </tr>
+                        <tr>
+                            <td>GHI890</td>
+                            <td>Rafael</td>
+                            <td>2</td>
+                            <td>02/01/2023</td>
+                        </tr>
+                        <tr>
+                            <td>JKL123</td>
+                            <td>Carlos</td>
+                            <td>2</td>
+                            <td>02/01/2023</td>
+                        </tr>
 
-                    <tr class="table-active">
-                        <td>ABC1234</td>
-                        <td>João</td>
-                        <td>1</td>
-                        <td>03/01/2023</td>
-                    </tr>
-                    <tr class="table-active">
-                        <td>DEF567</td>
-                        <td>José</td>
-                        <td>1</td>
-                        <td>03/01/2023</td>
-                    </tr>
-                    <tr>
-                        <td>GHI890</td>
-                        <td>Rafael</td>
-                        <td>2</td>
-                        <td>03/01/2023</td>
-                    </tr>
-                    <tr>
-                        <td>JKL123</td>
-                        <td>Carlos</td>
-                        <td>2</td>
-                        <td>03/01/2023</td>
-                    </tr>
-                </tbody>
-            </table>
+                        <tr class="table-active">
+                            <td>ABC1234</td>
+                            <td>João</td>
+                            <td>1</td>
+                            <td>03/01/2023</td>
+                        </tr>
+                        <tr class="table-active">
+                            <td>DEF567</td>
+                            <td>José</td>
+                            <td>1</td>
+                            <td>03/01/2023</td>
+                        </tr>
+                        <tr>
+                            <td>GHI890</td>
+                            <td>Rafael</td>
+                            <td>2</td>
+                            <td>03/01/2023</td>
+                        </tr>
+                        <tr>
+                            <td>JKL123</td>
+                            <td>Carlos</td>
+                            <td>2</td>
+                            <td>03/01/2023</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-            <p>Aqui o script automaticamente identifica todas as primaryrmações e cria os pontos, sem a necessidade de nenhuma
+            <p>Aqui o script automaticamente identifica todas as primaryrmações e cria os pontos, sem a necessidade de
+                nenhuma
                 primaryrmação manual por parte do usuário.</p>
             <p>No exemplo acima, o script identificaria 6 pontos. O responsável 1 receberia pontos em 01/01/2023, 02/01/2023
                 e 03/01/2023, com dois funcionários em cada, assim como o responsável 2.</p>
@@ -300,7 +310,8 @@
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalImportacaoDataFixaLabel">Importador (Data Fixa)</h5>
-                        <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-coreui-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">

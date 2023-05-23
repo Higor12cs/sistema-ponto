@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('funcionario_ponto', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ponto_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('funcionario_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('ponto_id')->constrained()->restrictOnUpdate()->restrictOnDelete();
+            $table->foreignId('funcionario_id')->constrained()->restrictOnUpdate()->restrictOnDelete();
             $table->time('entrada1')->nullable();
             $table->time('saida1')->nullable();
             $table->timestamps();

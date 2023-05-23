@@ -14,6 +14,7 @@ class PontosTable extends DataTableComponent
         return Ponto::query()
             ->with('user')
             ->where('user_id', auth()->user()->id)
+            ->where('finalizado', false)
             ->select();
     }
 
@@ -33,7 +34,8 @@ class PontosTable extends DataTableComponent
                     ];
                 }
                 return [];
-            });
+            })
+            ->setEmptyMessage('Nenhum ponto disponível para preenchimento.');
     }
 
     public function columns(): array

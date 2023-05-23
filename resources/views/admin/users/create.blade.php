@@ -33,7 +33,7 @@
                     @endif
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-4">
                     <label for="is_admin" class="form-label">Tipo Usuário</label>
                     <select wire:model="is_admin" class="form-select @if ($errors->has('is_admin')) is-invalid @endif"
                         id="is_admin" name="is_admin">

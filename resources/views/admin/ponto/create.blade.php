@@ -22,7 +22,7 @@
                         </div>
                     @endif
                 </div>
-                <div class="mb-3">
+                <div class="mb-4">
                     <label for="user_id" class="form-label">Responsável</label>
                     <select class="form-select @if ($errors->has('user_id')) is-invalid @endif"
                         aria-label="Seleção de Responsável" id="user_id" name="user_id">
@@ -40,8 +40,6 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Salvar</button>
             </form>
-        </div>
-        <div class="card-footer">
         </div>
     </div>
 @endsection

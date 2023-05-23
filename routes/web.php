@@ -49,6 +49,7 @@ Route::middleware(['auth', 'password.check', 'active.user'])->group(function () 
     Route::middleware('is_user')->group(function () {
         Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
         Route::get('/pontos', [UserPontoController::class, 'index'])->name('pontos.index');
+        Route::post('/pontos/{ponto}', [UserPontoController::class, 'close'])->name('pontos.close');
         Route::get('/pontos/{ponto:id}/preencher', [UserPontoController::class, 'preencher'])->name('pontos.preencher');
     });
 

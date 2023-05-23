@@ -33,7 +33,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="mb-3">
+                <div class="mb-4">
                     <label for="nome" class="form-label">Nome</label>
                     <input type="text" class="form-control @if ($errors->has('nome')) is-invalid @endif"
                         id="nome" name="nome" placeholder="João da Silva"
