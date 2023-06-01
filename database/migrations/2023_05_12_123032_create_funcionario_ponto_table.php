@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('funcionario_id')->constrained()->restrictOnUpdate()->restrictOnDelete();
             $table->time('entrada1')->nullable();
             $table->time('saida1')->nullable();
-            $table->timestamps();
         });
     }
 

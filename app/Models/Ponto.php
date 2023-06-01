@@ -32,6 +32,6 @@ class Ponto extends Model
     public function funcionarios(): BelongsToMany
     {
         return $this->belongsToMany(Funcionario::class)
-            ->withPivot('id', 'entrada1', 'saida1');
+            ->withPivot('id', 'entrada1', 'saida1', 'missed');
     }
 }

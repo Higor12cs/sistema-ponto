@@ -13,7 +13,22 @@
         </div>
     </div>
 
-    @livewire('admin.ponto.adicionar-funcionario-ponto', ['ponto' => $ponto])
+    @if ($ponto->finalizado)
+        <div class="card mb-4">
+            <div class="card-header">
+                {{ __('Ponto Finalizado') }}
+            </div>
+            <div class="card-body">
+                <div class="col-12 mb-2">
+                    <label class="form-label">Data Finalizado</label>
+                    <input type="text" class="form-control" value="{{ $ponto->finalizado_em->format('d/m/Y - H:i') }}"
+                        disabled>
+                </div>
+            </div>
+        </div>
+    @else
+        @livewire('admin.ponto.adicionar-funcionario-ponto', ['ponto' => $ponto])
+    @endif
 
     <div class="card mb-4">
         <div class="card-header">

@@ -22,7 +22,8 @@ class PontoController extends Controller
     public function close(Ponto $ponto): RedirectResponse
     {
         $everyEmployeeHasHours = $ponto->funcionarios->every(function ($funcionario) {
-            return !empty($funcionario->pivot->entrada1) && !empty($funcionario->pivot->saida1);
+            return (!empty($funcionario->pivot->entrada1) && !empty($funcionario->pivot->saida1)) ||
+                $funcionario->pivot->missed;
         });
 
         if (!$everyEmployeeHasHours) {

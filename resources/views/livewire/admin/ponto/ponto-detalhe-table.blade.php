@@ -9,14 +9,22 @@
         </thead>
         <tbody>
             @forelse ($funcionarios as $funcionario)
-                <tr>
+                <tr class="@if ($funcionario->pivot->missed) table-danger @endif">
                     <td>{{ $funcionario->id }}</td>
                     <td>{{ $funcionario->nome }}</td>
-                    <td>{{ $funcionario->pivot->entrada1 }}</td>
-                    <td>{{ $funcionario->pivot->saida1 }}</td>
+                    <td>
+                        @if (!empty($funcionario->pivot->entrada1))
+                            {{ date('H:i', strtotime($funcionario->pivot->entrada1)) }}
+                        @endif
+                    </td>
+                    <td>
+                        @if (!empty($funcionario->pivot->saida1))
+                            {{ date('H:i', strtotime($funcionario->pivot->saida1)) }}
+                        @endif
+                    </td>
                     <td class="text-nowrap">
-                        <button wire:click="removerFuncionario({{ $funcionario }})"
-                            class="btn btn-sm btn-danger">Remover</button>
+                        <button wire:click="removerFuncionario({{ $funcionario }})" class="btn btn-sm btn-danger"
+                            @if ($ponto->finalizado) disabled @endif>Remover</button>
                     </td>
                 </tr>
             @empty

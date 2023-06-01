@@ -12,8 +12,8 @@
                         <div class="mb-3 col-6">
                             <label for="entrada1" class="form-label">Entrada</label>
                             <input wire:model.defer="entrada1" type="time"
-                                class="form-control @if ($errors->has('entrada1')) is-invalid @endif" id="entrada1"
-                                name="entrada1">
+                                class="form-control @if ($errors->has('entrada1')) is-invalid @endif"
+                                @if ($missed) disabled @endif>
                             @if ($errors->has('entrada1'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('entrada1') }}
@@ -23,11 +23,20 @@
                         <div class="mb-3 col-6">
                             <label for="saida1" class="form-label">Saída</label>
                             <input wire:model.defer="saida1" type="time"
-                                class="form-control @if ($errors->has('saida1')) is-invalid @endif" id="saida1"
-                                name="saida1">
+                                class="form-control @if ($errors->has('saida1')) is-invalid @endif"
+                                @if ($missed) disabled @endif>
                             @if ($errors->has('saida1'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('saida1') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="col-12">
+                            <input wire:model="missed" type="checkbox" class="form-check-input">
+                            <label class="form-check-label ms-1" for="missed">Funcionário faltou?</label>
+                            @if ($errors->has('missed'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('missed') }}
                                 </div>
                             @endif
                         </div>

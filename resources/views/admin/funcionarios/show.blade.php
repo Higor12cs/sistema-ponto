@@ -30,7 +30,7 @@
                         value="{{ $funcionario->matricula }}" disabled>
                 </div>
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="nome" class="form-label">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome" value="{{ $funcionario->nome }}"
                     disabled>
