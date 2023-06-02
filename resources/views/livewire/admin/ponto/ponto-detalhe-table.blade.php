@@ -13,12 +13,16 @@
                     <td>{{ $funcionario->id }}</td>
                     <td>{{ $funcionario->nome }}</td>
                     <td>
-                        @if (!empty($funcionario->pivot->entrada1))
+                        @if ($funcionario->pivot->missed)
+                            <span class="badge bg-danger">Faltou</span>
+                        @elseif (!empty($funcionario->pivot->entrada1))
                             {{ date('H:i', strtotime($funcionario->pivot->entrada1)) }}
                         @endif
                     </td>
                     <td>
-                        @if (!empty($funcionario->pivot->saida1))
+                        @if ($funcionario->pivot->missed)
+                            <span class="badge bg-danger">Faltou</span>
+                        @elseif (!empty($funcionario->pivot->saida1))
                             {{ date('H:i', strtotime($funcionario->pivot->saida1)) }}
                         @endif
                     </td>

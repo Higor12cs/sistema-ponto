@@ -15,7 +15,7 @@ class PontoDetalheTable extends Component
         'funcionarioRemovido' => 'render',
     ];
 
-    public $ponto;
+    public Ponto $ponto;
     public $funcionarios;
 
     public function mount(Ponto $ponto)
@@ -30,9 +30,9 @@ class PontoDetalheTable extends Component
         return view('livewire.admin.ponto.ponto-detalhe-table');
     }
 
-    public function removerFuncionario($funcionario)
+    public function removerFuncionario(array $funcionario)
     {
-        $this->ponto->funcionarios()->detach($funcionario['id']);
+        $this->ponto->detachEmployee($funcionario['pivot']['id']);
         $this->emit('funcionarioRemovido');
 
         $this->emitAlert('success', 'Funcionário removido!');

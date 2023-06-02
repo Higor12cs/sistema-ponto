@@ -23,6 +23,8 @@ class Funcionario extends Model
     public function pontos(): BelongsToMany
     {
         return $this->belongsToMany(Ponto::class)
-            ->withPivot('id', 'entrada1', 'saida1', 'missed');
+            ->withPivot('id', 'entrada1', 'saida1', 'missed', 'deleted_at')
+            ->withTimestamps()
+            ->whereNull('funcionario_ponto.deleted_at');
     }
 }
