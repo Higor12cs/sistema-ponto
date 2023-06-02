@@ -60,7 +60,8 @@ class FuncionarioController extends Controller
     {
         $funcionario->update($request->validated());
 
-        return redirect()->route('admin.funcionarios.index')->with('success', 'Funcionário atualizado com sucesso.');
+        return redirect()->route('admin.funcionarios.index')
+            ->with('success', 'Funcionário atualizado com sucesso.');
     }
 
     /**
@@ -68,9 +69,10 @@ class FuncionarioController extends Controller
      */
     public function destroy(Funcionario $funcionario): RedirectResponse
     {
-        $funcionario->delete();
+        // $funcionario->delete();
+        $funcionario->update(['ativo' => !$funcionario->ativo]);
 
         return redirect()->route('admin.funcionarios.index')
-            ->with('succcess', 'Funcionário excluído com sucesso.');
+            ->with('success', 'Funcionário atualizado com sucesso.');
     }
 }

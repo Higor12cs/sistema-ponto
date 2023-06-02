@@ -7,8 +7,12 @@
             <form action="{{ route('admin.funcionarios.destroy', $funcionario) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button onclick="return confirm('Tem certeza que deseja excluir este funcionário?')" type="submit"
-                    class="btn btn-danger me-1">Excluir</button>
+                @if ($funcionario->ativo)
+                    <button onclick="return confirm('Tem certeza que deseja excluir este funcionário?')" type="submit"
+                        class="btn btn-danger me-1">Desativar</button>
+                @else
+                    <button type="submit" class="btn btn-primary me-1">Ativar</button>
+                @endif
             </form>
             <a href="{{ route('admin.funcionarios.index') }}" class="btn btn-secondary">Voltar</a>
         </div>

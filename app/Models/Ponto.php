@@ -45,6 +45,7 @@ class Ponto extends Model
     public function funcionarios(): BelongsToMany
     {
         return $this->belongsToMany(Funcionario::class)
+            ->withTrashed()
             ->withPivot('id', 'entrada1', 'saida1', 'missed', 'deleted_at')
             ->withTimestamps()
             ->whereNull('funcionario_ponto.deleted_at');
