@@ -54,6 +54,7 @@ Route::middleware(['auth', 'password.check', 'active.user'])->group(function () 
         Route::get('/reports/manager', [ReportController::class, 'byManager'])->name('reports.by-manager');
         Route::get('/reports/employee', [ReportController::class, 'byEmployee'])->name('reports.by-employee');
         Route::post('/reports/manager', [ReportController::class, 'reportByManager'])->name('reports.manager');
+        Route::post('/reports/manager/export', [ReportController::class, 'exportByManager'])->name('reports.manager.export');
     });
 
     Route::middleware('is_user')->group(function () {

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\DateRangeAttendanceExport;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ReportByManagerRequest;
 use App\Models\Employee;
 use App\Models\Attendance;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Maatwebsite\Excel\Excel;
 
 class ReportController extends Controller
 {
@@ -25,7 +28,7 @@ class ReportController extends Controller
         return view('admin.reports.employee', compact('employees'));
     }
 
-    public function reportByManager(Request $request)
+    public function reportByManager(ReportByManagerRequest $request): View
     {
         $user_id = $request->user_id;
         $start_date = $request->start_date;
@@ -41,5 +44,10 @@ class ReportController extends Controller
             ->get();
 
         return view('admin.reports.manager', compact('report', 'users', 'attendances', 'start_date', 'end_date', 'user_id'));
+    }
+
+    public function exportByManager(ReportByManagerRequest $request, Excel $excel)
+    {
+        return $excel->download(new DateRangeAttendanceExport($request->user_id, $request->start_date, $request->end_date), 'PontosExportados.xlsx');
     }
 }

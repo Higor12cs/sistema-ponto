@@ -14,7 +14,7 @@
             {{ __('Relatório por Responsável') }}
         </div>
         <div class="card-body">
-            <form action="{{ route('admin.reports.manager') }}" method="POST">
+            <form id="report" action="{{ route('admin.reports.manager') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="user_id" class="form-label">Responsável</label>
@@ -27,9 +27,9 @@
                             </option>
                         @endforeach
                     </select>
-                    @if ($errors->has('user'))
+                    @if ($errors->has('user_id'))
                         <div class="invalid-feedback">
-                            {{ $errors->first('user') }}
+                            {{ $errors->first('user_id') }}
                         </div>
                     @endif
                 </div>
@@ -55,8 +55,10 @@
                         @endif
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">{{ __('Emitir Relatório') }}</button>
             </form>
+            <div class="d-flex justify-content-start">
+                <button form="report" type="submit" class="btn btn-primary">{{ __('Emitir Relatório') }}</button>
+            </div>
         </div>
     </div>
 
@@ -67,11 +69,11 @@
 
                 @forelse ($attendances as $attendance)
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
+                        <table class="table table-bordered">
                             <thead class="table-dark">
                                 <th>{{ __('Ponto') }}</th>
-                                <th>{{ __('Responsável') }}</th>
                                 <th>{{ __('Data') }}</th>
+                                <th>{{ __('Responsável') }}</th>
                             </thead>
                             <tbody>
                                 <tr>
@@ -80,19 +82,21 @@
                                     <td class="col-8">{{ $attendance->user->name }}</td>
                                 <tr>
                                     <td colspan="4">
-                                        <table class="table table-success table-striped table-bordered table-hover">
-                                            <thead>
+                                        <table class="table table-striped table-hover">
+                                            <thead class="table-dark">
                                                 <th>{{ __('Funcionário') }}</th>
                                                 <th>{{ __('Entrada') }}</th>
                                                 <th>{{ __('Saida') }}</th>
                                             </thead>
                                             <tbody>
                                                 @foreach ($attendance->employees as $employee)
-                                                    <tr>
+                                                    <tr class="@if ($employee->pivot->missed) table-danger @endif">
                                                         <td class="col-8">{{ $employee->name }}</td>
                                                         <td class="col-2">
                                                             @if (!empty($employee->pivot->clock_in))
                                                                 {{ date('H:i', strtotime($employee->pivot->clock_in)) }}
+                                                            @elseif ($employee->pivot->missed)
+                                                                <span class="badge bg-danger">{{ __('Faltou') }}</span>
                                                             @else
                                                                 {{ __('Não Preenchido') }}
                                                             @endif
@@ -100,6 +104,8 @@
                                                         <td class="col-2">
                                                             @if (!empty($employee->pivot->clock_out))
                                                                 {{ date('H:i', strtotime($employee->pivot->clock_out)) }}
+                                                            @elseif ($employee->pivot->missed)
+                                                                <span class="badge bg-danger">{{ __('Faltou') }}</span>
                                                             @else
                                                                 {{ __('Não Preenchido') }}
                                                             @endif
@@ -120,6 +126,15 @@
                 @empty
                     <span>{{ __('Nenhum ponto encontrado.') }}</span>
                 @endforelse
+
+                <form id="export" action="{{ route('admin.reports.manager.export') }}" method="POST" target="_blank">
+                    @csrf
+
+                    <input type="hidden" name="start_date" value="{{ $start_date ?? '' }}">
+                    <input type="hidden" name="end_date" value="{{ $end_date ?? '' }}">
+                    <input type="hidden" name="user_id" value="{{ $user_id ?? '' }}">
+                    <button form="export" type="submit" class="btn btn-success">{{ __('Exportar Excel') }}</button>
+                </form>
             </div>
         </div>
     @endisset
