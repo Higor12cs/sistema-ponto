@@ -45,6 +45,7 @@ Route::middleware(['auth', 'password.check', 'active.user'])->group(function () 
         Route::resource('/attendances', AttendanceController::class);
         Route::get('/importer', [ImporterController::class, 'index'])->name('importer.index');
         Route::post('/importer/importar/fixed-date', [ImporterController::class, 'fixedDateImport'])->name('import.fixed-date');
+        Route::post('/importer/importar/date-range', [ImporterController::class, 'dateRangeImport'])->name('import.date-range');
         Route::post('/importer/importar/fixed-employee', [ImporterController::class, 'fixedManagerImport'])->name('import.fixed-manager');
         Route::resource('/employees', EmployeeController::class);
         Route::resource('/users', UserController::class)->except('destroy');
