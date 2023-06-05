@@ -35,8 +35,8 @@ Auth::routes([
 Route::get('/', fn () => redirect()->to('/login'));
 
 Route::middleware(['auth', 'active.user'])->group(function () {
-    Route::get('/nova-senha', [UserController::class, 'newPassword'])->name('new-password.index');
-    Route::post('/nova-senha', [UserController::class, 'setNewPassword'])->name('new-password.update');
+    Route::get('/new-password', [UserController::class, 'newPassword'])->name('new-password.index');
+    Route::post('/new-password', [UserController::class, 'setNewPassword'])->name('new-password.update');
 });
 
 Route::middleware(['auth', 'password.check', 'active.user'])->group(function () {
@@ -44,9 +44,9 @@ Route::middleware(['auth', 'password.check', 'active.user'])->group(function () 
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
         Route::resource('/attendances', AttendanceController::class);
         Route::get('/importer', [ImporterController::class, 'index'])->name('importer.index');
-        Route::post('/importer/importar/fixed-date', [ImporterController::class, 'fixedDateImport'])->name('import.fixed-date');
-        Route::post('/importer/importar/date-range', [ImporterController::class, 'dateRangeImport'])->name('import.date-range');
-        Route::post('/importer/importar/fixed-employee', [ImporterController::class, 'fixedManagerImport'])->name('import.fixed-manager');
+        Route::post('/importer/import/fixed-date', [ImporterController::class, 'fixedDateImport'])->name('import.fixed-date');
+        Route::post('/importer/import/date-range', [ImporterController::class, 'dateRangeImport'])->name('import.date-range');
+        Route::post('/importer/import/fixed-employee', [ImporterController::class, 'fixedManagerImport'])->name('import.fixed-manager');
         Route::resource('/employees', EmployeeController::class);
         Route::resource('/users', UserController::class)->except('destroy');
         Route::post('/users/password-reset/{user}', [UserController::class, 'setToResetPassword'])->name('users.set-to-reset-password');
