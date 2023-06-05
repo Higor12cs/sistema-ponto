@@ -40,11 +40,12 @@ class DateRangeAttendanceExport implements FromQuery, WithMapping, WithHeadings
             $employeeData[] = [
                 $attendance->id,
                 $attendance->date,
+                $attendance->ended_at,
                 $attendance->user->name,
                 $employee->name,
-                $employee->clock_in,
-                $employee->clock_out,
-                $employee->missed ? 'Sim' : 'Não',
+                $employee->pivot->clock_in,
+                $employee->pivot->clock_out,
+                $employee->pivot->missed ? 'Sim' : 'Não',
             ];
         }
 
@@ -54,8 +55,9 @@ class DateRangeAttendanceExport implements FromQuery, WithMapping, WithHeadings
     public function headings(): array
     {
         return [
-            'Código',
-            'Data',
+            'Ponto',
+            'Data Referente',
+            'Data Preenchido',
             'Responsável',
             'Funcionário',
             'Entrada',

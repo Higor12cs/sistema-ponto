@@ -69,17 +69,17 @@
 
                 @forelse ($attendances as $attendance)
                     <div class="table-responsive">
-                        <table class="table table-bordered">
+                        <table class="table">
                             <thead class="table-dark">
                                 <th>{{ __('Ponto') }}</th>
                                 <th>{{ __('Data') }}</th>
                                 <th>{{ __('Responsável') }}</th>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr class="fw-bold">
                                     <td class="col-2">{{ str_pad($attendance->id, 4, '0', STR_PAD_LEFT) }}</td>
-                                    <td class="col-2">{{ $attendance->date->format('d/m/Y') }}</td>
-                                    <td class="col-8">{{ $attendance->user->name }}</td>
+                                    <td class="col-4">{{ $attendance->date->format('d/m/Y') }}</td>
+                                    <td class="col-6">{{ $attendance->user->name }}</td>
                                 <tr>
                                     <td colspan="4">
                                         <table class="table table-striped table-hover">
@@ -120,16 +120,12 @@
                             </tbody>
                         </table>
                     </div>
-
-                    <hr class="mb-4 pb-2">
-
                 @empty
                     <span>{{ __('Nenhum ponto encontrado.') }}</span>
                 @endforelse
 
                 <form id="export" action="{{ route('admin.reports.manager.export') }}" method="POST" target="_blank">
                     @csrf
-
                     <input type="hidden" name="start_date" value="{{ $start_date ?? '' }}">
                     <input type="hidden" name="end_date" value="{{ $end_date ?? '' }}">
                     <input type="hidden" name="user_id" value="{{ $user_id ?? '' }}">
