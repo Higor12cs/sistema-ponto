@@ -9,7 +9,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('pontos.index') }}">
+        <a class="nav-link" href="{{ route('attendance.index') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-alarm') }}"></use>
             </svg>

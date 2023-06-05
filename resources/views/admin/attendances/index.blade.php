@@ -2,18 +2,18 @@
 
 @section('content')
     <div class="d-flex justify-content-between mb-4">
-        <h4>{{ __('Usuários') }}</h4>
-        <a href="{{ route('admin.users.create') }}" class="btn btn-primary">{{ __('Cadastrar') }}</a>
+        <h4>{{ __('Pontos') }}</h4>
+        <a href="{{ route('admin.attendances.create') }}" class="btn btn-primary">{{ __('Criar Ponto') }}</a>
     </div>
 
     <x-alerts />
 
     <div class="card mb-4">
         <div class="card-header">
-            {{ __('Usuários') }}
+            {{ __('Pontos') }}
         </div>
         <div class="card-body">
-            @livewire('admin.users.users-table')
+            @livewire('admin.attendance.attendances-table')
         </div>
     </div>
 @endsection

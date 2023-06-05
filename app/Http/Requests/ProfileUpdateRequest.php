@@ -28,7 +28,7 @@ class ProfileUpdateRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => 'nome',
+            'name' => 'name',
             'username' => 'usuário',
             'password' => 'senha',
         ];

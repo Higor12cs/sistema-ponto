@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UserRequest extends FormRequest
+class EmployeeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,11 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = $this->route('user');
+        $id = $this->route('employee');
 
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255', Rule::unique('users', 'username')->ignore($id)],
-            'is_admin' => ['sometimes', 'required', 'boolean'],
+            'registration' => ['nullable', 'alpha_num', Rule::unique('employees', 'registration')->ignore($id)],
+            'name' => ['required'],
         ];
     }
 
@@ -35,16 +34,8 @@ class UserRequest extends FormRequest
     {
         return [
             'required' => 'O campo :attribute é obrigatório.',
-            'unique' => 'O campo :attribute já está sendo utilizando.'
-        ];
-    }
-
-    public function attributes(): array
-    {
-        return [
-            'name' => 'name',
-            'username' => 'usuário',
-            'is_admin' => 'tipo usuário',
+            'alpha_num' => 'O campo :attribute permite apenas letras e números.',
+            'unique' => 'O campo :attribute já esta sendo utilizado.'
         ];
     }
 }

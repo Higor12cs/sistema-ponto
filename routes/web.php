@@ -1,14 +1,14 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\Admin\FuncionarioController;
-use App\Http\Controllers\Admin\ImportadorController;
-use App\Http\Controllers\Admin\PontoController;
-use App\Http\Controllers\Admin\RelatorioController;
+use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\ImporterController;
+use App\Http\Controllers\Admin\AttendanceController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
-use App\Http\Controllers\User\PontoController as UserPontoController;
+use App\Http\Controllers\User\AttendanceController as UserAttendanceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +23,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes([
+    'login' => true,
+    'logout' => true,
+    'register' => false,
+    'reset' => false,
+    'confirm' => false,
+    'verify' => false,
+]);
+
 Route::get('/', fn () => redirect()->to('/login'));
 
 Route::middleware(['auth', 'active.user'])->group(function () {
@@ -33,35 +42,26 @@ Route::middleware(['auth', 'active.user'])->group(function () {
 Route::middleware(['auth', 'password.check', 'active.user'])->group(function () {
     Route::middleware('is_admin')->prefix('/admin')->as('admin.')->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-        Route::resource('/pontos', PontoController::class);
-        Route::get('/importador', [ImportadorController::class, 'index'])->name('importador.index');
-        Route::post('/importador/importar/data-fixa', [ImportadorController::class, 'importarDataFixa'])->name('importador.data-fixa');
-        Route::post('/importador/importar/funcionario-fixo', [ImportadorController::class, 'importarFuncionarioFixo'])->name('importador.funcionario-fixo');
-        Route::resource('/funcionarios', FuncionarioController::class);
+        Route::resource('/attendances', AttendanceController::class);
+        Route::get('/importer', [ImporterController::class, 'index'])->name('importer.index');
+        Route::post('/importer/importar/fixed-date', [ImporterController::class, 'fixedDateImport'])->name('import.fixed-date');
+        Route::post('/importer/importar/fixed-employee', [ImporterController::class, 'fixedManagerImport'])->name('import.fixed-manager');
+        Route::resource('/employees', EmployeeController::class);
         Route::resource('/users', UserController::class)->except('destroy');
-        Route::post('/users/redefinir-senha/{user}', [UserController::class, 'setToResetPassword'])->name('users.set-to-reset-password');
-        Route::post('/users/ativo/{user}', [UserController::class, 'switchUserActiveStatus'])->name('users.switch-active-status');
-        Route::get('/relatorios/responsavel', [RelatorioController::class, 'filtroPorResponsavel'])->name('relatorios.filtro.responsavel');
-        Route::get('/relatorios/funcionario', [RelatorioController::class, 'filtroPorFuncionario'])->name('relatorios.filtro.funcionario');
-        Route::post('/relatorios/responsavel', [RelatorioController::class, 'relatorioPorResponsavel'])->name('relatorios.responsavel');
+        Route::post('/users/password-reset/{user}', [UserController::class, 'setToResetPassword'])->name('users.set-to-reset-password');
+        Route::post('/users/active/{user}', [UserController::class, 'switchUserActiveStatus'])->name('users.switch-active-status');
+        Route::get('/reports/manager', [ReportController::class, 'byManager'])->name('reports.by-manager');
+        Route::get('/reports/employee', [ReportController::class, 'byEmployee'])->name('reports.by-employee');
+        Route::post('/reports/manager', [ReportController::class, 'reportByManager'])->name('reports.manager');
     });
 
     Route::middleware('is_user')->group(function () {
         Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
-        Route::get('/pontos', [UserPontoController::class, 'index'])->name('pontos.index');
-        Route::post('/pontos/{ponto}', [UserPontoController::class, 'close'])->name('pontos.close');
-        Route::get('/pontos/{ponto:id}/preencher', [UserPontoController::class, 'preencher'])->name('pontos.preencher');
+        Route::get('/attendances', [UserAttendanceController::class, 'index'])->name('attendance.index');
+        Route::post('/attendances/{attendance}', [UserAttendanceController::class, 'close'])->name('attendance.close');
+        Route::get('/attendances/{attendance:id}/fill', [UserAttendanceController::class, 'fill'])->name('attendance.fill');
     });
 
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
-
-Auth::routes([
-    'login' => true,
-    'logout' => true,
-    'register' => false,
-    'reset' => false,
-    'confirm' => false,
-    'verify' => false,
-]);

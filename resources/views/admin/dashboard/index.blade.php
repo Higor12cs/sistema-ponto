@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="d-flex justify-content-betwewen mb-4">
-        <h4>Dashboard</h4>
+        <h4>{{ __('Dashboard') }}</h4>
     </div>
 
     <x-alerts />

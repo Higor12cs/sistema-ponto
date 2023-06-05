@@ -9,7 +9,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.pontos.index') }}">
+        <a class="nav-link" href="{{ route('admin.attendances.index') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-alarm') }}"></use>
             </svg>
@@ -18,7 +18,7 @@
     </li>
 
     <li class="nav-group" aria-expanded="false">
-        <a class="nav-link" href="{{ route('admin.importador.index') }}">
+        <a class="nav-link" href="{{ route('admin.importer.index') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-cloud-upload') }}"></use>
             </svg>
@@ -27,7 +27,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.funcionarios.index') }}">
+        <a class="nav-link" href="{{ route('admin.employees.index') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-people') }}"></use>
             </svg>
@@ -53,14 +53,14 @@
         </a>
         <ul class="nav-group-items" style="height: 0px;">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.relatorios.filtro.responsavel') }}" target="_top">
+                <a class="nav-link" href="{{ route('admin.reports.by-manager') }}" target="_top">
                     <svg class="nav-icon">
                         <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
                     </svg> Responsável
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.relatorios.filtro.funcionario') }}" target="_top">
+                <a class="nav-link" href="{{ route('admin.reports.by-employee') }}" target="_top">
                     <svg class="nav-icon">
                         <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
                     </svg> Funcionário

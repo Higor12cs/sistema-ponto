@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UserRequest extends FormRequest
+class AttendanceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +21,9 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = $this->route('user');
-
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255', Rule::unique('users', 'username')->ignore($id)],
-            'is_admin' => ['sometimes', 'required', 'boolean'],
+            'date' => ['required', 'date'],
+            'user_id' => ['required', 'exists:users,id'],
         ];
     }
 
@@ -35,16 +31,14 @@ class UserRequest extends FormRequest
     {
         return [
             'required' => 'O campo :attribute é obrigatório.',
-            'unique' => 'O campo :attribute já está sendo utilizando.'
+            'exists' => 'O :attribute não está cadastrado ou não é um :attribute válido.'
         ];
     }
 
     public function attributes(): array
     {
         return [
-            'name' => 'name',
-            'username' => 'usuário',
-            'is_admin' => 'tipo usuário',
+            'user_id' => 'responsável',
         ];
     }
 }

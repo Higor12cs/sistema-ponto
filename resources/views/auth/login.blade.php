@@ -49,7 +49,7 @@
                             @if (Route::has('password.request'))
                                 <div class="col-6 text-end">
                                     <a href="{{ route('password.request') }}" class="btn btn-link px-0"
-                                        type="button">{{ __('Forgot Your Password?') }}</a>
+                                        type="button">{{ __('Esqueceu Sua Senha?') }}</a>
                                 </div>
                             @endif
                         </div>
@@ -62,7 +62,7 @@
                         <div>
                             <h2>{{ __('Sign up') }}</h2>
                             <a href="{{ route('register') }}"
-                                class="btn btn-lg btn-outline-light mt-3">{{ __('Register') }}</a>
+                                class="btn btn-lg btn-outline-light mt-3">{{ __('Registrar') }}</a>
                         </div>
                     </div>
                 </div>
