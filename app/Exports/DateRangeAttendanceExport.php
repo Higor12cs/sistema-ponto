@@ -4,10 +4,12 @@ namespace App\Exports;
 
 use App\Models\Attendance;
 use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
-class DateRangeAttendanceExport implements FromQuery, WithMapping, WithHeadings
+class DateRangeAttendanceExport implements FromQuery, WithMapping, WithHeadings, ShouldAutoSize
 {
     private $start_date;
     private $end_date;
@@ -20,9 +22,6 @@ class DateRangeAttendanceExport implements FromQuery, WithMapping, WithHeadings
         $this->user_id = $user_id;
     }
 
-    /**
-     * @return \Illuminate\Support\Collection
-     */
     public function query()
     {
         return Attendance::query()
@@ -39,10 +38,11 @@ class DateRangeAttendanceExport implements FromQuery, WithMapping, WithHeadings
         foreach ($attendance->employees as $employee) {
             $employeeData[] = [
                 $attendance->id,
-                $attendance->date,
-                $attendance->ended_at,
+                $attendance->date->format('d/m/Y'),
+                $attendance->ended_at->format('d/m/Y H:i'),
                 $attendance->user->name,
                 $employee->name,
+                $employee->registration,
                 $employee->pivot->clock_in,
                 $employee->pivot->clock_out,
                 $employee->pivot->missed ? 'Sim' : 'Não',
@@ -60,9 +60,17 @@ class DateRangeAttendanceExport implements FromQuery, WithMapping, WithHeadings
             'Data Preenchido',
             'Responsável',
             'Funcionário',
+            'Matrícula',
             'Entrada',
             'Saída',
             'Faltou',
+        ];
+    }
+
+    public function styles(): array
+    {
+        return [
+            1 => ['font' => ['bold' => true]],
         ];
     }
 }

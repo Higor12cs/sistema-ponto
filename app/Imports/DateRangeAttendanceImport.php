@@ -12,14 +12,14 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 
 class DateRangeAttendanceImport implements ToCollection
 {
-    private $date1;
-    private $date2;
+    private $start_date;
+    private $end_date;
     private $firstRow = true;
 
-    public function __construct($date1, $date2)
+    public function __construct($start_date, $end_date)
     {
-        $this->date1 = $date1;
-        $this->date2 = $date2;
+        $this->start_date = $start_date;
+        $this->end_date = $end_date;
     }
 
     public function collection(Collection $rows)
@@ -36,7 +36,7 @@ class DateRangeAttendanceImport implements ToCollection
 
         $groupedRows = $rows->groupBy(2);
 
-        $period = CarbonPeriod::create(Carbon::parse($this->date1), Carbon::parse($this->date2));
+        $period = CarbonPeriod::create(Carbon::parse($this->start_date), Carbon::parse($this->end_date));
 
         foreach ($period as $date) {
             $this->firstRow = true;

@@ -52,7 +52,52 @@
             <hr>
 
             <div class="d-flex justify-content-between">
-                <h5>Método 1 - Importação com data manual fixa</h5>
+                <h5>Método 1 - Importação com intervalo de datas</h5>
+                <button class="btn btn-primary" data-coreui-toggle="modal"
+                    data-coreui-target="#dateRangeImportModal">Importar Layout</button>
+            </div>
+
+            <p>Neste método, o programa espera o seguinte layout dentro do aqruivo:</p>
+
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <th>Matrícula</th>
+                        <th>Nome</th>
+                        <th>Responsável</th>
+                    </thead>
+                    <tbody>
+                        <tr class="table-active">
+                            <td>ABC1234</td>
+                            <td>João</td>
+                            <td>1</td>
+                        </tr>
+                        <tr class="table-active">
+                            <td>DEF567</td>
+                            <td>José</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>GHI890</td>
+                            <td>Rafael</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>JKL123</td>
+                            <td>Carlos</td>
+                            <td>2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>Fornecendo os dados neste layout, o script automaticamente irá agrupar os responsáveis e criar as capas dos
+                pontos em todas as datas entre o período informado.</p>
+
+            <hr>
+
+            <div class="d-flex justify-content-between">
+                <h5>Método 2 - Importação com data manual fixa</h5>
                 <button class="btn btn-primary" data-coreui-toggle="modal"
                     data-coreui-target="#fixedDateImportModal">Importar Layout</button>
             </div>
@@ -98,56 +143,8 @@
 
             <hr>
 
-            {{-- Novo Método --}}
             <div class="d-flex justify-content-between">
-                <h5>Método 1.1 - Importação com intervalo de datas</h5>
-                <button class="btn btn-primary" data-coreui-toggle="modal"
-                    data-coreui-target="#dateRangeImportModal">Importar Layout</button>
-            </div>
-
-            <p>Neste método, o programa espera o seguinte layout dentro do aqruivo:</p>
-
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                        <th>Matrícula</th>
-                        <th>Nome</th>
-                        <th>Responsável</th>
-                    </thead>
-                    <tbody>
-                        <tr class="table-active">
-                            <td>ABC1234</td>
-                            <td>João</td>
-                            <td>1</td>
-                        </tr>
-                        <tr class="table-active">
-                            <td>DEF567</td>
-                            <td>José</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td>GHI890</td>
-                            <td>Rafael</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <td>JKL123</td>
-                            <td>Carlos</td>
-                            <td>2</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <p>Fornecendo os dados neste layout, o script automaticamente irá agrupar os responsáveis e criar as capas dos
-                pontos com a data informada manualmente no ato da importação.</p>
-            <p>Por exemplo, no cado de uma planilha importada com 50 funcionários (50 linhas), contendo 5 responsávies,
-                serão geradas 10 capas. E relacionadas a cada capa existirá 10 funcionários.</p>
-
-            <hr>
-
-            <div class="d-flex justify-content-between">
-                <h5>Método 2 - Importação de responsável individual fixo</h5>
+                <h5>Método 3 - Importação de responsável individual fixo</h5>
                 <button type="button" class="btn btn-primary" data-coreui-toggle="modal"
                     data-coreui-target="#fixedManagerImportModal">Importar Layout</button>
             </div>
@@ -207,8 +204,8 @@
 
             <hr>
 
-            <div class="d-flex justify-content-between">
-                <h5>Método 3 - Importação automática [Em desenvolvimento]</h5>
+            {{-- <div class="d-flex justify-content-between">
+                <h5>Método 4 - Importação automática [Em desenvolvimento]</h5>
                 <button class="btn btn-primary" disabled>Importar Layout</button>
             </div>
 
@@ -305,7 +302,7 @@
                 nenhuma
                 primaryrmação manual por parte do usuário.</p>
             <p>No exemplo acima, o script identificaria 6 pontos. O responsável 1 receberia pontos em 01/01/2023, 02/01/2023
-                e 03/01/2023, com dois funcionários em cada, assim como o responsável 2.</p>
+                e 03/01/2023, com dois funcionários em cada, assim como o responsável 2.</p> --}}
 
         </div>
     </div>
