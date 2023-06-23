@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\AttendanceController as UserAttendanceController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/migrate', function () {
+    Artisan::call('migrate --seed');
+    return 'Success';
+});
 
 Auth::routes([
     'login' => true,
@@ -62,7 +68,7 @@ Route::middleware(['auth', 'password.check', 'active.user'])->group(function () 
     Route::middleware('is_user')->group(function () {
         Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
         Route::get('/attendances', [UserAttendanceController::class, 'index'])->name('attendances.index');
-        Route::post('/attendances/{attendance}', [UserAttendanceController::class, 'close'])->name('attendances.close');
+        Route::post('/attendances/close/{attendance}', [UserAttendanceController::class, 'close'])->name('attendances.close');
         Route::get('/attendances/{attendance:id}/fill', [UserAttendanceController::class, 'fill'])->name('attendances.fill');
     });
 

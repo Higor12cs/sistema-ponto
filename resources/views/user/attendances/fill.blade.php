@@ -24,5 +24,5 @@
         </div>
     </div>
 
-    @livewire('user.attendances.fill-attendance-modal')
+    @livewire('user.attendance.fill-attendance-modal')
 @endsection

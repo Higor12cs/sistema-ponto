@@ -20,7 +20,7 @@ class FillAttendanceModal extends Component
 
     public function render()
     {
-        return view('livewire.user.attendances.fill-attendance-modal');
+        return view('livewire.user.attendance.fill-attendance-modal');
     }
 
     public function clock($attendance)
