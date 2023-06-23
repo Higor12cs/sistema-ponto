@@ -31,7 +31,10 @@
                     @endif
                 </div>
 
-                <button type="submit" class="btn btn-primary">{{ __('Incluir') }}</button>
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary">{{ __('Incluir') }}</button>
+                    <a href="{{ route('admin.attendances.close', $attendance) }}" class="btn btn-danger">{{ __('Fechar Ponto') }}</a>
+                </div>
             </form>
         </div>
     </div>

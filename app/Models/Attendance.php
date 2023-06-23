@@ -17,12 +17,14 @@ class Attendance extends Model
         'user_id',
         'date',
         'ended',
+        'ended_by_admin',
         'ended_at',
     ];
 
     protected $casts = [
         'date' => 'datetime',
         'ended' => 'boolean',
+        'ended_by_admin' => 'boolean',
         'ended_at' => 'datetime',
     ];
 
