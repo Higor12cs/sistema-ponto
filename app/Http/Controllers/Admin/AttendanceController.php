@@ -62,7 +62,11 @@ class AttendanceController extends Controller
 
     public function reopenAttendance(Attendance $attendance): RedirectResponse
     {
-        $attendance->update(['ended' => false]);
+        $attendance->update([
+            'ended' => false,
+            'ended_by_admin' => false,
+            'ended_at' => null,
+        ]);
 
         return to_route('admin.attendances.edit', $attendance)->with('success', 'Ponto reaberto com sucesso.');
     }
