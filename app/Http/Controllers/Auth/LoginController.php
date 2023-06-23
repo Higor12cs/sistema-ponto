@@ -44,7 +44,7 @@ class LoginController extends Controller
         if ($user->is_admin) {
             return redirect()->route('admin.dashboard');
         } else {
-            return redirect()->route('dashboard');
+            return redirect()->route('attendances.index');
         }
     }
 

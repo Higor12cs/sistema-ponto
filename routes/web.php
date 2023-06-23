@@ -61,9 +61,9 @@ Route::middleware(['auth', 'password.check', 'active.user'])->group(function () 
 
     Route::middleware('is_user')->group(function () {
         Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
-        Route::get('/attendances', [UserAttendanceController::class, 'index'])->name('attendance.index');
-        Route::post('/attendances/{attendance}', [UserAttendanceController::class, 'close'])->name('attendance.close');
-        Route::get('/attendances/{attendance:id}/fill', [UserAttendanceController::class, 'fill'])->name('attendance.fill');
+        Route::get('/attendances', [UserAttendanceController::class, 'index'])->name('attendances.index');
+        Route::post('/attendances/{attendance}', [UserAttendanceController::class, 'close'])->name('attendances.close');
+        Route::get('/attendances/{attendance:id}/fill', [UserAttendanceController::class, 'fill'])->name('attendances.fill');
     });
 
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');

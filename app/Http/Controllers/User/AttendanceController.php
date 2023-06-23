@@ -27,7 +27,7 @@ class AttendanceController extends Controller
         });
 
         if (!$everyEmployeeHasHours) {
-            return redirect()->route('attendance.fill', $attendance)
+            return redirect()->route('attendances.fill', $attendance)
                 ->with('warning', 'Ainda existem funcionários sem horarios definidos neste ponto.');
         }
 
@@ -36,7 +36,7 @@ class AttendanceController extends Controller
             'ended_at' => now(),
         ]);
 
-        return redirect()->route('attendance.index')
+        return redirect()->route('attendances.index')
             ->with('success', 'Ponto concluído e fechado com sucesso.');
     }
 }

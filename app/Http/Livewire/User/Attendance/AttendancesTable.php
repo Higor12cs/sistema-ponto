@@ -23,7 +23,7 @@ class AttendancesTable extends DataTableComponent
         $this->setPrimaryKey('id')
             ->setDefaultSort('date', 'asc')
             ->setTableRowUrl(function ($row) {
-                return route('attendance.fill', $row);
+                return route('attendances.fill', $row);
             })
             ->setSearchDisabled()
             ->setTdAttributes(function (Column $column) {
