@@ -5,6 +5,7 @@ namespace App\Http\Livewire\User\Attendance;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Attendance;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 
 class AttendancesTable extends DataTableComponent
@@ -15,6 +16,7 @@ class AttendancesTable extends DataTableComponent
             ->with('user')
             ->where('user_id', auth()->user()->id)
             ->where('ended', false)
+            ->whereBetween('date', [Carbon::today()->subDays(5), Carbon::today()])
             ->select();
     }
 

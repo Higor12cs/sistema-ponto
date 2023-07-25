@@ -24,7 +24,7 @@ class Employee extends Model
     public function attendances(): BelongsToMany
     {
         return $this->belongsToMany(Attendance::class)
-            ->withPivot('id', 'clock_in', 'clock_out', 'missed', 'deleted_at')
+            ->withPivot('id', 'clock_in', 'clock_out', 'missed', 'dsr', 'sick', 'absence', 'done', 'deleted_at')
             ->withTimestamps()
             ->whereNull('attendance_employee.deleted_at');
     }

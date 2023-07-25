@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "alpinejs": "^3.12.1",
-        "jquery": "^3.7.0"
+        "jquery": "^3.7.0",
+        "jquery-mask-plugin": "^1.14.16"
     }
 }

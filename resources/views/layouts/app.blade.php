@@ -9,6 +9,7 @@
     <title>{{ config('app.name', 'Sistema Ponto') }}</title>
     <meta name="theme-color" content="#ffffff">
     @vite(['resources/js/app.js', 'resources/sass/app.scss'])
+    @stack('css')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @livewireStyles()
 </head>
@@ -88,6 +89,8 @@
         </div>
     </div>
     <script src="{{ asset('js/coreui.bundle.min.js') }}"></script>
+
+    @stack('js')
     @livewireScripts()
 </body>
 
