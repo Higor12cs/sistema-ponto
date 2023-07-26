@@ -25,6 +25,9 @@ class UsersTable extends DataTableComponent
             Column::make("Código", "id")
                 ->sortable()
                 ->collapseOnTablet(),
+            Column::make("Matrícula", "registration")
+                ->sortable()
+                ->searchable(),
             Column::make("Nome", "name")
                 ->sortable()
                 ->searchable(),

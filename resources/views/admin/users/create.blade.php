@@ -23,6 +23,16 @@
                     @endif
                 </div>
                 <div class="mb-3">
+                    <label for="registration" class="form-label">{{ __('Matrícula') }}</label>
+                    <input type="text" class="form-control @if ($errors->has('registration')) is-invalid @endif"
+                        id="registration" name="registration" placeholder="{{ __('ABC123') }}">
+                    @if ($errors->has('registration'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('registration') }}
+                        </div>
+                    @endif
+                </div>
+                <div class="mb-3">
                     <label for="username" class="form-label">{{ __('Usuário') }}</label>
                     <input type="text" class="form-control @if ($errors->has('username')) is-invalid @endif"
                         id="username" name="username" placeholder="{{ __('joao-silva') }}">

@@ -27,6 +27,7 @@ class UserController extends Controller
 
         User::create([
             'name' => $validatedData['name'],
+            'registration' => $validatedData['registration'],
             'username' => $validatedData['username'],
             'password' => bcrypt($validatedData['username']),
             'is_admin' => $validatedData['is_admin'],

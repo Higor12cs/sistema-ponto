@@ -24,7 +24,7 @@ class DateRangeImportRequest extends FormRequest
         return [
             'file' => 'required|file|mimes:xls,xlsx',
             'date1' => 'required|date',
-            'date2' => 'required|date|after:date1',
+            'date2' => 'required|date|after_or_equal:date1',
         ];
     }
 
@@ -38,7 +38,7 @@ class DateRangeImportRequest extends FormRequest
             'date1.date' => 'A data inicial informada não é válida.',
             'date2.required' => 'O campo data final é obrigatório.',
             'date2.date' => 'A data final informada não é válida.',
-            'date2.after' => 'A data final deve ser maior que a data inicial.',
+            'date2.after_or_equal' => 'A data final deve ser maior ou igual que a data inicial.',
         ];
     }
 }

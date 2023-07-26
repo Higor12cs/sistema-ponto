@@ -94,7 +94,7 @@
             <p>Fornecendo os dados neste layout, o script automaticamente irá agrupar os responsáveis e criar as capas dos
                 pontos em todas as datas entre o período informado.</p>
 
-            <hr>
+            {{-- <hr>
 
             <div class="d-flex justify-content-between">
                 <h5>Método 2 - Importação com data manual fixa</h5>
@@ -202,7 +202,7 @@
                 01/01/2023, outro em 02/01/2023 e o último com data de 03/01/2023. Todos com dois responsáveis em cada
                 ponto.</p>
 
-            <hr>
+            <hr> --}}
 
             {{-- <div class="d-flex justify-content-between">
                 <h5>Método 4 - Importação automática [Em desenvolvimento]</h5>

@@ -27,7 +27,7 @@
                                 </svg></span>
                             <input class="form-control @error('password_confirmation') is-invalid @enderror" type="password"
                                 name="password_confirmation" placeholder="{{ __('Confirme sua Senha') }}" required
-                                autocomplete="new-password">
+                                autocomplete="new-password" autofocus>
                         </div>
                         <div class="row">
                             <div class="col-6">

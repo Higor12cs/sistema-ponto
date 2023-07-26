@@ -26,6 +26,7 @@ class UserRequest extends FormRequest
 
         return [
             'name' => ['required', 'string', 'max:255'],
+            'registration' => ['required', 'string', 'max:255', Rule::unique('users', 'registration')->ignore($id)],
             'username' => ['required', 'string', 'max:255', Rule::unique('users', 'username')->ignore($id)],
             'is_admin' => ['sometimes', 'required', 'boolean'],
         ];

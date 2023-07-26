@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Attendance;
 use App\Models\Employee;
+use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Collection;
@@ -41,24 +42,32 @@ class DateRangeAttendanceImport implements ToCollection
         foreach ($period as $date) {
             $this->firstRow = true;
 
-            $groupedRows->each(function ($rows, $manager) use ($date) {
+            $groupedRows->each(function ($rows, $managerRegistration) use ($date) {
                 if ($this->firstRow) {
                     $this->firstRow = false;
                 } else {
+                    $manager = User::where('registration', $managerRegistration)->firstOrFail();
+
                     $attendance = new Attendance();
                     $attendance->date = $date;
-                    $attendance->user_id = $manager;
+                    $attendance->user_id = $manager->id;
                     $attendance->save();
 
                     foreach ($rows as $row) {
                         $employee = Employee::firstOrNew(['registration' => $row[0]]);
+
+                        $clock_in = $row[3] !== null ? Carbon::createFromFormat('H:i:s', gmdate('H:i:s', $row[3] * 86400))->format('H:i:s') : null;
+                        $clock_out = $row[4] !== null ? Carbon::createFromFormat('H:i:s', gmdate('H:i:s', $row[4] * 86400))->format('H:i:s') : null;
 
                         if (!$employee->exists) {
                             $employee->name = $row[1];
                             $employee->save();
                         }
 
-                        $attendance->employees()->attach($employee->id);
+                        $attendance->employees()->attach($employee->id, [
+                            'clock_in' => $clock_in,
+                            'clock_out' => $clock_out,
+                        ]);
                     }
                 }
             });
