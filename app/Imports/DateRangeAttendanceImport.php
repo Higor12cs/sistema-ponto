@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
 class DateRangeAttendanceImport implements ToCollection
@@ -28,11 +29,12 @@ class DateRangeAttendanceImport implements ToCollection
         Validator::make($rows->toArray(), [
             '*.0' => 'required',
             '*.1' => 'required',
-            '*.2' => 'required',
+            '*.2' => ['required', 'exists:users,registration'],
         ], [
             '*.0.required' => 'O valor da célula :attribute é obrigatório. Todas matrículas são obrigatórias',
             '*.1.required' => 'O valor da célula :attribute é obrigatório. Todos nomes são obrigatórios',
             '*.2.required' => 'O valor da célula :attribute é obrigatório. Todas responsáveis são obrigatórios.',
+            '*.2.exists' => 'Existem matrículas de responsáveis inválidas e/ou incorretas.',
         ])->validate();
 
         $groupedRows = $rows->groupBy(2);
@@ -46,7 +48,11 @@ class DateRangeAttendanceImport implements ToCollection
                 if ($this->firstRow) {
                     $this->firstRow = false;
                 } else {
-                    $manager = User::where('registration', $managerRegistration)->firstOrFail();
+                    $manager = User::where('registration', $managerRegistration)->first();
+
+                    if (!$manager) {
+                        throw ValidationException::withMessages(['danger' => 'Responsável de matrícula ' . $managerRegistration . ' não existe.']);
+                    }
 
                     $attendance = new Attendance();
                     $attendance->date = $date;
