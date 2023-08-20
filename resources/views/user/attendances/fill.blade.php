@@ -35,9 +35,12 @@
                 <th style="width: 70px; min-width: 70px;" class="text-center">{{ __('Início') }}</th>
                 <th style="width: 70px; min-width: 70px;" class="text-center">{{ __('Fim') }}</th>
                 <th style="width: 50px; min-width: 50px;" class="text-center">{{ __('Ações') }}</th>
+                <th style="width: 90px; min-width: 90px;" class="text-center">{{ __('Faltou') }}</th>
                 <th style="width: 90px; min-width: 90px;" class="text-center">{{ __('DSR') }}</th>
                 <th style="width: 90px; min-width: 90px;" class="text-center">{{ __('Atestado') }}</th>
                 <th style="width: 90px; min-width: 90px;" class="text-center">{{ __('Abonado') }}</th>
+                <th style="width: 90px; min-width: 90px;" class="text-center">{{ __('Férias') }}</th>
+                <th style="width: 90px; min-width: 90px;" class="text-center">{{ __('Dispensado') }}</th>
             </thead>
             <tbody>
                 @forelse ($attendance->employees as $attendanceEmployee)
@@ -47,17 +50,15 @@
                     ])
                 @empty
                     <tr>
-                        <td colspan="5">{{ __('Nenhum funcionário encontrado.') }}</td>
+                        <td colspan="10">{{ __('Nenhum funcionário encontrado.') }}</td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
 
-    <form action="{{ route('attendances.close', $attendance) }}" method="POST">
+    <form action="{{ route('attendances.close', $attendance) }}" method="POST" class="mb-4">
         @csrf
-        <button type="submit"
-            onclick="return confirm('Tem certeza que deseja concluir este ponto? Após clicar em ok, este ponto não estará mais disponível para edição.')"
-            class="btn btn-primary">Concluir Ponto</button>
+        <button type="submit" onclick="return confirm('Tem certeza que deseja concluir este ponto? Após clicar em ok, este ponto não estará mais disponível para edição.')" class="btn btn-primary">Concluir Ponto</button>
     </form>
 @endsection

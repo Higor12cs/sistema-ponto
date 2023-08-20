@@ -5,6 +5,7 @@ namespace App\Http\Livewire\User\Attendance;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Attendance;
+use App\Models\Configuration;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -12,11 +13,13 @@ class AttendancesTable extends DataTableComponent
 {
     public function builder(): Builder
     {
+        $userAttendanceDisplayLimit = Configuration::where('key', 'USER_ATTENDANCE_DISPLAY_LIMIT')->first();
+
         return Attendance::query()
             ->with('user')
             ->where('user_id', auth()->user()->id)
             ->where('ended', false)
-            ->whereBetween('date', [Carbon::today()->subDays(5), Carbon::today()])
+            ->whereBetween('date', [Carbon::today()->subDays($userAttendanceDisplayLimit->value), Carbon::today()])
             ->select();
     }
 

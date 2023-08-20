@@ -14,7 +14,7 @@
             <form wire:submit.prevent="add">
                 <div class="mb-3">
                     <label for="employee" class="form-label">{{ __('Funcionário') }}</label>
-                    <select wire:model="employee"
+                    <select wire:model="employee" wire:loading.attr="disabled"
                         class="form-select @if ($errors->has('employee')) is-invalid @endif" id="employee"
                         name="employee">
                         <option value="">{{ __('-- selecione --') }}</option>

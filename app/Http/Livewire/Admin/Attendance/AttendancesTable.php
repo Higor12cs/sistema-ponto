@@ -6,6 +6,7 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Attendance;
 use Illuminate\Database\Eloquent\Builder;
+use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
 
 class AttendancesTable extends DataTableComponent
 {
@@ -36,6 +37,16 @@ class AttendancesTable extends DataTableComponent
             Column::make("Criado Em", "created_at")
                 ->sortable()
                 ->format(fn ($value) => $value->format('d/m/Y H:i')),
+        ];
+    }
+
+    public function filters(): array
+    {
+        return [
+            DateFilter::make('Data Ponto')
+                ->filter(function (Builder $builder, string $value) {
+                    $builder->where('date', $value);
+                }),
         ];
     }
 }

@@ -23,7 +23,7 @@ class AttendanceController extends Controller
     {
         $everyEmployeeHasHours = $attendance->employees->every(function ($employee) {
             return (!empty($employee->pivot->clock_in) && !empty($employee->pivot->clock_out)) ||
-                $employee->pivot->missed || $employee->pivot->dsr || $employee->pivot->sick || $employee->pivot->absence;
+                $employee->pivot->missed || $employee->pivot->dsr || $employee->pivot->sick || $employee->pivot->absence || $employee->pivot->vacation || $employee->pivot->dismissed;
         });
 
         if (!$everyEmployeeHasHours) {

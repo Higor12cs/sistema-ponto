@@ -14,24 +14,18 @@ class AttendanceToFill extends Component
     public $attendanceEmployee;
     public $clock_in;
     public $clock_out;
-    public $missed;
-    public $dsr;
-    public $sick;
-    public $absence;
+    public $options = ['missed', 'dsr', 'sick', 'absence', 'vacation', 'dismissed'];
     public $done;
 
     public function mount()
     {
-        $clock_in = $this->attendanceEmployee['pivot']['clock_in'] ?? null;
-        $this->clock_in = $clock_in ? Carbon::createFromFormat('H:i:s', $clock_in)->format('H:i') : null;
+        foreach ($this->options as $option) {
+            $this->$option = $this->attendanceEmployee['pivot'][$option] ?? false;
+        }
 
-        $clock_out = $this->attendanceEmployee['pivot']['clock_out'] ?? null;
-        $this->clock_out = $clock_out ? Carbon::createFromFormat('H:i:s', $this->attendanceEmployee['pivot']['clock_out'])->format('H:i') : null;
+        $this->clock_in = $this->formatTime($this->attendanceEmployee['pivot']['clock_in']);
+        $this->clock_out = $this->formatTime($this->attendanceEmployee['pivot']['clock_out']);
 
-        $this->missed = $this->attendanceEmployee['pivot']['missed'] ?? false;
-        $this->dsr = $this->attendanceEmployee['pivot']['dsr'] ?? false;
-        $this->sick = $this->attendanceEmployee['pivot']['sick'] ?? false;
-        $this->absence = $this->attendanceEmployee['pivot']['absence'] ?? false;
         $this->done = $this->attendanceEmployee['pivot']['done'] ?? false;
     }
 
@@ -47,60 +41,57 @@ class AttendanceToFill extends Component
 
     public function saveAttendance()
     {
-        if ($this->missed || $this->dsr || $this->sick || $this->absence) {
-            $this->clock_in = null;
-            $this->clock_out = null;
-        }
-
         $this->validate([
             'clock_in' => ['nullable'],
             'clock_out' => ['nullable'],
-            'missed' => ['boolean'],
-            'dsr' => ['boolean'],
-            'sick' => ['boolean'],
-            'absence' => ['boolean'],
+            'done' => ['boolean'],
+            ...array_fill_keys($this->options, ['boolean']),
         ]);
 
         $this->done = true;
 
+        $data = array_merge([
+            'clock_in' => $this->hasTrueOption() ? null : $this->clock_in,
+            'clock_out' => $this->hasTrueOption() ? null : $this->clock_out,
+            'done' => $this->done,
+        ], $this->getOptionsData());
+
         $this->attendance->employees()
-            ->updateExistingPivot($this->attendanceEmployee->id, [
-                'clock_in' => $this->missed ? null : $this->clock_in,
-                'clock_out' => $this->missed ? null : $this->clock_out,
-                'missed' => $this->missed,
-                'dsr' => $this->dsr,
-                'sick' => $this->sick,
-                'absence' => $this->absence,
-                'done' => $this->done,
-            ]);
+            ->updateExistingPivot($this->attendanceEmployee->id, $data);
 
         $this->emitAlert('success', 'Funcionário apontado!');
     }
 
-    public function setDSR()
+    public function setOption($selected)
     {
-        if ($this->dsr) {
-            $this->dsr = true;
-            $this->sick = false;
-            $this->absence = false;
+        foreach ($this->options as $option) {
+            $this->$option = $option === $selected;
         }
     }
 
-    public function setSick()
+    private function hasTrueOption()
     {
-        if ($this->sick) {
-            $this->sick = true;
-            $this->dsr = false;
-            $this->absence = false;
+        foreach ($this->options as $option) {
+            if ($this->$option) {
+                return true;
+            }
         }
+        return false;
     }
 
-    public function setAbsence()
+    private function formatTime($time)
     {
-        if ($this->absence) {
-            $this->absence = true;
-            $this->dsr = false;
-            $this->sick = false;
+        return $time ? Carbon::createFromFormat('H:i:s', $time)->format('H:i') : null;
+    }
+
+    private function getOptionsData()
+    {
+        $optionsData = [];
+
+        foreach ($this->options as $option) {
+            $optionsData[$option] = $this->$option;
         }
+
+        return $optionsData;
     }
 }

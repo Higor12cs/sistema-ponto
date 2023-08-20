@@ -43,8 +43,8 @@ class AddEmployeeToAttendance extends Component
 
         $this->attendance->employees()->attach($this->employee);
 
-        $this->emit('employeeCreated');
         $this->employee = '';
+        $this->emit('employeeCreated');
 
         $this->emitAlert('success', 'Funcionário adicionado!');
     }

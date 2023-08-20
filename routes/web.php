@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\ImporterController;
 use App\Http\Controllers\Admin\AttendanceController;
+use App\Http\Controllers\Admin\ConfigurationController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
@@ -24,11 +25,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/migrate', function () {
-    Artisan::call('migrate --seed');
-    return 'Success';
-});
-
 Auth::routes([
     'login' => true,
     'logout' => true,
@@ -37,6 +33,13 @@ Auth::routes([
     'confirm' => false,
     'verify' => false,
 ]);
+
+Route::middleware(['auth', 'is_admin', 'password.check', 'active.user'])->group(function () {
+    Route::get('/migrate', function () {
+        Artisan::call('migrate');
+        return 'Success';
+    });
+});
 
 Route::get('/', fn () => redirect()->to('/login'));
 
@@ -59,6 +62,8 @@ Route::middleware(['auth', 'password.check', 'active.user'])->group(function () 
         Route::resource('/users', UserController::class)->except('destroy');
         Route::post('/users/password-reset/{user}', [UserController::class, 'setToResetPassword'])->name('users.set-to-reset-password');
         Route::post('/users/active/{user}', [UserController::class, 'switchUserActiveStatus'])->name('users.switch-active-status');
+        Route::get('/configurations', [ConfigurationController::class, 'index'])->name('configuration.index');
+        Route::post('/configurations/set-user-attendance-display-limit', [ConfigurationController::class, 'setUserAttendanceDisplayLimit'])->name('configuration.set-user-attendance-display-limit');
         Route::get('/reports/manager', [ReportController::class, 'byManager'])->name('reports.by-manager');
         Route::get('/reports/employee', [ReportController::class, 'byEmployee'])->name('reports.by-employee');
         Route::post('/reports/manager', [ReportController::class, 'reportByManager'])->name('reports.manager');
