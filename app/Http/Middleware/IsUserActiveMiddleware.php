@@ -15,7 +15,7 @@ class IsUserActiveMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->user()->active) {
+        if (! auth()->user()->active) {
             auth()->logout();
 
             return redirect()->route('login')->with('warning', 'Seu usuário está inativado. Por favor, entre em contato com seu administrador.');

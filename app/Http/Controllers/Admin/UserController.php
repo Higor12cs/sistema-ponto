@@ -95,6 +95,7 @@ class UserController extends Controller
 
         if ($user->id == auth()->user()->id) {
             auth()->logout();
+
             return to_route('login');
         }
 
@@ -109,7 +110,7 @@ class UserController extends Controller
                 ->with('danger', 'Um usuário não pode se desativar. Por favor, entre como outro usuário administrador para desativar esta conta.');
         }
 
-        $user->active = !$user->active;
+        $user->active = ! $user->active;
         $user->save();
 
         return to_route('admin.users.index')->with('success', 'Status alterado com sucesso.');

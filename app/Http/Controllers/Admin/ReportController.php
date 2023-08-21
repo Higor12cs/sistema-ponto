@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\DateRangeAttendanceExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReportByManagerRequest;
-use App\Models\Employee;
 use App\Models\Attendance;
+use App\Models\Employee;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Excel;
 

@@ -15,7 +15,9 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 class DateRangeAttendanceImport implements ToCollection
 {
     private $start_date;
+
     private $end_date;
+
     private $firstRow = true;
 
     public function __construct($start_date, $end_date)
@@ -50,8 +52,8 @@ class DateRangeAttendanceImport implements ToCollection
                 } else {
                     $manager = User::where('registration', $managerRegistration)->first();
 
-                    if (!$manager) {
-                        throw ValidationException::withMessages(['danger' => 'Responsável de matrícula ' . $managerRegistration . ' não existe.']);
+                    if (! $manager) {
+                        throw ValidationException::withMessages(['danger' => 'Responsável de matrícula '.$managerRegistration.' não existe.']);
                     }
 
                     $attendance = new Attendance();
@@ -65,7 +67,7 @@ class DateRangeAttendanceImport implements ToCollection
                         $clock_in = $row[3] !== null ? Carbon::createFromFormat('H:i:s', gmdate('H:i:s', $row[3] * 86400))->format('H:i:s') : null;
                         $clock_out = $row[4] !== null ? Carbon::createFromFormat('H:i:s', gmdate('H:i:s', $row[4] * 86400))->format('H:i:s') : null;
 
-                        if (!$employee->exists) {
+                        if (! $employee->exists) {
                             $employee->name = $row[1];
                             $employee->save();
                         }

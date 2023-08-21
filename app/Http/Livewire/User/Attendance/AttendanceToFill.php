@@ -11,10 +11,15 @@ class AttendanceToFill extends Component
     use SwalAlertsTrait;
 
     public $attendance;
+
     public $attendanceEmployee;
+
     public $clock_in;
+
     public $clock_out;
+
     public $options = ['missed', 'dsr', 'sick', 'absence', 'vacation', 'dismissed'];
+
     public $done;
 
     public function mount()
@@ -83,6 +88,7 @@ class AttendanceToFill extends Component
                 return true;
             }
         }
+
         return false;
     }
 

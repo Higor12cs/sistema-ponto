@@ -11,7 +11,9 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 class DateRangeAttendanceExport implements FromQuery, WithMapping, WithHeadings, ShouldAutoSize
 {
     private $start_date;
+
     private $end_date;
+
     private $user_id;
 
     public function __construct($user_id, $start_date, $end_date)

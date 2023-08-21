@@ -3,8 +3,8 @@
 namespace App\Http\Livewire\Admin\Attendance;
 
 use App\Http\Traits\SwalAlertsTrait;
-use App\Models\Employee;
 use App\Models\Attendance;
+use App\Models\Employee;
 use Livewire\Component;
 
 class AddEmployeeToAttendance extends Component
@@ -17,7 +17,9 @@ class AddEmployeeToAttendance extends Component
     ];
 
     public Attendance $attendance;
+
     public $employees;
+
     public $employee;
 
     public function mount(Attendance $attendance)

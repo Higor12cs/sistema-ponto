@@ -35,7 +35,7 @@ class EmployeeRequest extends FormRequest
         return [
             'required' => 'O campo :attribute é obrigatório.',
             'alpha_num' => 'O campo :attribute permite apenas letras e números.',
-            'unique' => 'O campo :attribute já esta sendo utilizado.'
+            'unique' => 'O campo :attribute já esta sendo utilizado.',
         ];
     }
 }

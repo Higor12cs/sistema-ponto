@@ -12,10 +12,9 @@ trait SwalAlertsTrait
     /**
      * Emit a Swal alert.
      *
-     * @param string $icon The icon for the alert.
-     * @param string $title The title of the alert.
-     * @param string $text The text of the alert (default: '').
-     * @return void
+     * @param  string  $icon The icon for the alert.
+     * @param  string  $title The title of the alert.
+     * @param  string  $text The text of the alert (default: '').
      */
     public function emitAlert(string $icon, string $title, string $text = ''): void
     {

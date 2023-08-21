@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Admin\Users;
 
+use App\Models\User;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\User;
 
 class UsersTable extends DataTableComponent
 {
@@ -22,33 +22,33 @@ class UsersTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Código", "id")
+            Column::make('Código', 'id')
                 ->sortable()
                 ->collapseOnTablet(),
-            Column::make("Matrícula", "registration")
+            Column::make('Matrícula', 'registration')
                 ->sortable()
                 ->searchable(),
-            Column::make("Nome", "name")
+            Column::make('Nome', 'name')
                 ->sortable()
                 ->searchable(),
-            Column::make("Usuário", "username")
+            Column::make('Usuário', 'username')
                 ->sortable()
                 ->collapseOnTablet(),
-            Column::make("is_admin")
+            Column::make('is_admin')
                 ->hideIf(true),
-            Column::make("Tipo Usuário")
+            Column::make('Tipo Usuário')
                 ->label(
                     fn ($row) => $row->is_admin == true ? '<h6><span class="badge bg-success">Administrador</span></h6>' : '<h6><span class="badge bg-primary">Responsável</span></h6>'
                 )->html()
                 ->collapseOnTablet(),
-            Column::make("active")
+            Column::make('active')
                 ->hideIf(true),
-            Column::make("Ativo")
+            Column::make('Ativo')
                 ->label(
                     fn ($row) => $row->active == true ? '<h6><span class="badge bg-primary">Ativo</span></h6>' : '<h6><span class="badge bg-danger">Inativo</span></h6>'
                 )->html()
                 ->collapseOnTablet(),
-            Column::make("Data Cadastro", "created_at")
+            Column::make('Data Cadastro', 'created_at')
                 ->sortable()
                 ->format(fn ($value) => $value->format('d/m/Y H:i'))
                 ->collapseOnTablet(),

@@ -31,7 +31,7 @@ class AttendanceRequest extends FormRequest
     {
         return [
             'required' => 'O campo :attribute é obrigatório.',
-            'exists' => 'O :attribute não está cadastrado ou não é um :attribute válido.'
+            'exists' => 'O :attribute não está cadastrado ou não é um :attribute válido.',
         ];
     }
 

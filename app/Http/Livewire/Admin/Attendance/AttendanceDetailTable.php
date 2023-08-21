@@ -16,6 +16,7 @@ class AttendanceDetailTable extends Component
     ];
 
     public Attendance $attendance;
+
     public $employees;
 
     public function mount(Attendance $attendance)

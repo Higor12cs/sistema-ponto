@@ -36,7 +36,7 @@ class UserRequest extends FormRequest
     {
         return [
             'required' => 'O campo :attribute é obrigatório.',
-            'unique' => 'O campo :attribute já está sendo utilizando.'
+            'unique' => 'O campo :attribute já está sendo utilizando.',
         ];
     }
 

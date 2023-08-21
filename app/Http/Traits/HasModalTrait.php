@@ -12,9 +12,8 @@ trait HasModalTrait
     /**
      * Open a modal.
      *
-     * @param string $name The name of the modal.
-     * @param string $action The action to perform on the modal (default: 'open').
-     * @return void
+     * @param  string  $name The name of the modal.
+     * @param  string  $action The action to perform on the modal (default: 'open').
      */
     public function openModal(string $name, string $action = 'show'): void
     {
@@ -27,9 +26,8 @@ trait HasModalTrait
     /**
      * Close a modal.
      *
-     * @param string $name The name of the modal.
-     * @param string $action The action to perform on the modal (default: 'hide').
-     * @return void
+     * @param  string  $name The name of the modal.
+     * @param  string  $action The action to perform on the modal (default: 'hide').
      */
     public function closeModal(string $name, string $action = 'hide'): void
     {

@@ -2,12 +2,12 @@
 
 namespace App\Http\Livewire\User\Attendance;
 
-use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Attendance;
 use App\Models\Configuration;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class AttendancesTable extends DataTableComponent
 {
@@ -32,12 +32,13 @@ class AttendancesTable extends DataTableComponent
             })
             ->setSearchDisabled()
             ->setTdAttributes(function (Column $column) {
-                if (in_array($column->getTitle(),  ['Ações'])) {
+                if (in_array($column->getTitle(), ['Ações'])) {
                     return [
                         'default' => false,
                         'style' => 'width:50px',
                     ];
                 }
+
                 return [];
             })
             ->setEmptyMessage('Nenhum ponto disponível para preenchimento.');
@@ -46,11 +47,11 @@ class AttendancesTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Código", "id")
+            Column::make('Código', 'id')
                 ->sortable(),
-            Column::make("Responsável", "user.name")
+            Column::make('Responsável', 'user.name')
                 ->sortable(),
-            Column::make("Data", "date")
+            Column::make('Data', 'date')
                 ->sortable()
                 ->format(fn ($value) => $value->format('d/m/Y')),
         ];

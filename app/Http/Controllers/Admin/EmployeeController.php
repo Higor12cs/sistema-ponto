@@ -49,7 +49,7 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee): RedirectResponse
     {
         // $employee->delete();
-        $employee->update(['active' => !$employee->active]);
+        $employee->update(['active' => ! $employee->active]);
 
         return to_route('admin.employees.index')
             ->with('success', 'Funcionário atualizado com sucesso.');

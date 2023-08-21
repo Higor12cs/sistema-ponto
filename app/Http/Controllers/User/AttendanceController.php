@@ -22,11 +22,11 @@ class AttendanceController extends Controller
     public function close(Attendance $attendance): RedirectResponse
     {
         $everyEmployeeHasHours = $attendance->employees->every(function ($employee) {
-            return (!empty($employee->pivot->clock_in) && !empty($employee->pivot->clock_out)) ||
+            return (! empty($employee->pivot->clock_in) && ! empty($employee->pivot->clock_out)) ||
                 $employee->pivot->missed || $employee->pivot->dsr || $employee->pivot->sick || $employee->pivot->absence || $employee->pivot->vacation || $employee->pivot->dismissed;
         });
 
-        if (!$everyEmployeeHasHours) {
+        if (! $everyEmployeeHasHours) {
             return redirect()->route('attendances.fill', $attendance)
                 ->with('warning', 'Ainda existem funcionários sem horarios definidos neste ponto.');
         }

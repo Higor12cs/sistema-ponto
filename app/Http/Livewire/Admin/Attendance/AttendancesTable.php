@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire\Admin\Attendance;
 
-use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Attendance;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\MultiSelectFilter;
 
@@ -29,14 +29,14 @@ class AttendancesTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Código", "id")
+            Column::make('Código', 'id')
                 ->sortable(),
-            Column::make("Responsável", "user.name")
+            Column::make('Responsável', 'user.name')
                 ->sortable(),
-            Column::make("Data", "date")
+            Column::make('Data', 'date')
                 ->sortable()
                 ->format(fn ($value) => $value->format('d/m/Y')),
-            Column::make("Criado Em", "created_at")
+            Column::make('Criado Em', 'created_at')
                 ->sortable()
                 ->format(fn ($value) => $value->format('d/m/Y H:i')),
         ];

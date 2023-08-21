@@ -1,15 +1,15 @@
 <?php
 
+use App\Http\Controllers\Admin\AttendanceController;
+use App\Http\Controllers\Admin\ConfigurationController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\ImporterController;
-use App\Http\Controllers\Admin\AttendanceController;
-use App\Http\Controllers\Admin\ConfigurationController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\AttendanceController as UserAttendanceController;
+use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +37,7 @@ Auth::routes([
 Route::middleware(['auth', 'is_admin', 'password.check', 'active.user'])->group(function () {
     Route::get('/migrate', function () {
         Artisan::call('migrate');
+
         return 'Success';
     });
 });

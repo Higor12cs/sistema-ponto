@@ -2,8 +2,8 @@
 
 namespace App\Imports;
 
-use App\Models\Employee;
 use App\Models\Attendance;
+use App\Models\Employee;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -11,6 +11,7 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 class FixedDateAttendanceImport implements ToCollection
 {
     private $date;
+
     private $firstRow = true;
 
     public function __construct($date)
@@ -44,7 +45,7 @@ class FixedDateAttendanceImport implements ToCollection
                 foreach ($rows as $row) {
                     $employee = Employee::firstOrNew(['registration' => $row[0]]);
 
-                    if (!$employee->exists) {
+                    if (! $employee->exists) {
                         $employee->name = $row[1];
                         $employee->save();
                     }
