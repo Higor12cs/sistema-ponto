@@ -21,7 +21,7 @@
             <div class="card-body">
                 <div class="col-12 mb-3">
                     <label class="form-label">{{ __('Data Finalizado') }}</label>
-                    <input type="text" class="form-control" value="{{ $attendance->ended_at->format('d/m/Y - H:i') }}"
+                    <input type="text" class="form-control" value="{{ $attendance->ended_at?->format('d/m/Y - H:i') }}"
                         disabled>
                 </div>
                 <a href="{{ route('admin.attendances.reopen', $attendance) }}"

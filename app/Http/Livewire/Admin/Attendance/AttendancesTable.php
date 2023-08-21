@@ -9,6 +9,7 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\MultiSelectFilter;
+use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
 class AttendancesTable extends DataTableComponent
 {
@@ -30,15 +31,24 @@ class AttendancesTable extends DataTableComponent
     {
         return [
             Column::make('Código', 'id')
-                ->sortable(),
+                ->sortable()
+                ->collapseOnTablet(),
             Column::make('Responsável', 'user.name')
                 ->sortable(),
             Column::make('Data', 'date')
                 ->sortable()
                 ->format(fn ($value) => $value->format('d/m/Y')),
+            Column::make('ended', 'ended')
+                ->hideIf(true),
+            Column::make('Status')
+                ->label(
+                    fn ($row) => $row->ended == true ? '<span class="badge bg-primary">Finalizado '.$row->ended_at?->format('d/m/Y - H:i').'</span>' : '<span class="badge bg-danger">Aberto</span>'
+                )->html()
+                ->collapseOnTablet(),
             Column::make('Criado Em', 'created_at')
                 ->sortable()
-                ->format(fn ($value) => $value->format('d/m/Y H:i')),
+                ->format(fn ($value) => $value->format('d/m/Y H:i'))
+                ->collapseOnTablet(),
         ];
     }
 
@@ -59,6 +69,15 @@ class AttendancesTable extends DataTableComponent
                         ->map(fn ($tag) => $tag->name)
                         ->toArray()
                 ),
+            SelectFilter::make('Status')
+                ->options([
+                    '' => 'Todos',
+                    false => 'Aberto',
+                    true => 'Finalizado',
+                ])
+                ->filter(function (Builder $builder, string $value) {
+                    $builder->where('ended', $value);
+                }),
         ];
     }
 }
