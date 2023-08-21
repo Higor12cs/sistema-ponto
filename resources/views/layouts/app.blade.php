@@ -34,8 +34,7 @@
     <div class="wrapper d-flex flex-column min-vh-100 bg-light">
         <header class="header header-sticky mb-4">
             <div class="container-fluid">
-                <button class="header-toggler px-md-0 me-md-3" type="button"
-                    onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
+                <button class="header-toggler px-md-0 me-md-3" type="button" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
                     <svg class="icon icon-lg">
                         <use xlink:href="{{ asset('icons/coreui.svg#cil-menu') }}"></use>
                     </svg>
@@ -56,8 +55,7 @@
                 </ul>
                 <ul class="header-nav ms-3">
                     <li class="nav-item dropdown">
-                        <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button"
-                            aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                             {{ Auth::user()->name }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-end pt-0">
@@ -69,8 +67,7 @@
                             </a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
                                     <svg class="icon me-2">
                                         <use xlink:href="{{ asset('icons/coreui.svg#cil-account-logout') }}"></use>
                                     </svg>
@@ -93,5 +90,55 @@
     @stack('js')
     @livewireScripts()
 </body>
+
+<script type="text/javascript">
+    /* Recover sidebar state */
+    var sidebarState = sessionStorage.getItem('sidebar-state');
+    var sidebar = document.getElementById('sidebar');
+
+    if (sidebarState === 'collapsed') {
+        sidebar.classList.add('sidebar-narrow-unfoldable');
+    } else if (sidebarState === 'hidden') {
+        sidebar.classList.add('hide');
+    }
+
+    /* Store sidebar state */
+    var sidebarToggler = document.querySelector(".sidebar-toggler");
+    var headerToggler = document.querySelector(".header-toggler");
+
+    sidebarToggler.addEventListener('click', function(event) {
+        event.preventDefault();
+
+        var currentState = sessionStorage.getItem('sidebar-state');
+        var nextState;
+
+        if (currentState === 'open') {
+            nextState = 'collapsed';
+        } else if (currentState === 'collapsed') {
+            nextState = 'open';
+        } else { 
+            nextState = 'collapsed';
+        }
+
+        sessionStorage.setItem('sidebar-state', nextState);
+        console.log(sessionStorage.getItem('sidebar-state'));
+    });
+
+    headerToggler.addEventListener('click', function(event) {
+        event.preventDefault();
+
+        var currentState = sessionStorage.getItem('sidebar-state');
+        var nextState;
+
+        if (currentState === 'hidden') {
+            nextState = 'open';
+        } else {
+            nextState = 'hidden';
+        }
+
+        sessionStorage.setItem('sidebar-state', nextState);
+        console.log(sessionStorage.getItem('sidebar-state'));
+    });
+</script>
 
 </html>

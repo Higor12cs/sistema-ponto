@@ -5,8 +5,10 @@ namespace App\Http\Livewire\Admin\Attendance;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Attendance;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
+use Rappasoft\LaravelLivewireTables\Views\Filters\MultiSelectFilter;
 
 class AttendancesTable extends DataTableComponent
 {
@@ -47,6 +49,16 @@ class AttendancesTable extends DataTableComponent
                 ->filter(function (Builder $builder, string $value) {
                     $builder->where('date', $value);
                 }),
+            MultiSelectFilter::make('Responsáveis')
+                ->options(
+                    User::query()
+                        ->where('is_admin', false)
+                        ->orderBy('name')
+                        ->get()
+                        ->keyBy('id')
+                        ->map(fn ($tag) => $tag->name)
+                        ->toArray()
+                ),
         ];
     }
 }

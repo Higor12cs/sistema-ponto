@@ -42,9 +42,9 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if ($user->is_admin) {
-            return redirect()->route('admin.dashboard');
+            return to_route('admin.dashboard')->with('success', __('Bem-vindo!'));
         } else {
-            return redirect()->route('attendances.index');
+            return to_route('attendances.index')->with('success', __('Bem-vindo!'));
         }
     }
 

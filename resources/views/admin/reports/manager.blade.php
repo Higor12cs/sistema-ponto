@@ -18,8 +18,7 @@
                 @csrf
                 <div class="mb-3">
                     <label for="user_id" class="form-label">Responsável</label>
-                    <select wire:model="user_id" class="form-select @if ($errors->has('user_id')) is-invalid @endif"
-                        id="user_id" name="user_id">
+                    <select wire:model="user_id" class="form-select @if ($errors->has('user_id')) is-invalid @endif" id="user_id" name="user_id">
                         <option value="">{{ __('-- selecione --') }}</option>
                         @foreach ($users as $user)
                             <option value="{{ $user->id }}" @if (isset($user_id) && $user->id == $user_id) selected @endif>
@@ -36,8 +35,7 @@
                 <div class="row mb-4">
                     <div class="col-6">
                         <label for="start_date" class="form-label">{{ __('Data Inicio') }}</label>
-                        <input type="date" class="form-control @if ($errors->has('start_date')) is-invalid @endif"
-                            id="start_date" name="start_date" value="{{ $start_date ?? '' }}">
+                        <input type="date" class="form-control @if ($errors->has('start_date')) is-invalid @endif" id="start_date" name="start_date" value="{{ $start_date ?? '' }}">
                         @if ($errors->has('start_date'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('start_date') }}
@@ -46,8 +44,7 @@
                     </div>
                     <div class="col-6">
                         <label for="end_date" class="form-label">{{ __('Data Fim') }}</label>
-                        <input type="date" class="form-control @if ($errors->has('end_date')) is-invalid @endif"
-                            id="end_date" name="end_date" value="{{ $end_date ?? '' }}">
+                        <input type="date" class="form-control @if ($errors->has('end_date')) is-invalid @endif" id="end_date" name="end_date" value="{{ $end_date ?? '' }}">
                         @if ($errors->has('end_date'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('end_date') }}
@@ -90,13 +87,23 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($attendance->employees as $employee)
-                                                    <tr class="@if ($employee->pivot->missed) table-danger @endif">
+                                                    <tr>
                                                         <td class="col-8">{{ $employee->name }}</td>
                                                         <td class="col-2">
                                                             @if (!empty($employee->pivot->clock_in))
                                                                 {{ date('H:i', strtotime($employee->pivot->clock_in)) }}
                                                             @elseif ($employee->pivot->missed)
                                                                 <span class="badge bg-danger">{{ __('Faltou') }}</span>
+                                                            @elseif ($employee->pivot->dsr)
+                                                                <span class="badge bg-info">{{ __('DSR') }}</span>
+                                                            @elseif ($employee->pivot->sick)
+                                                                <span class="badge bg-warning">{{ __('Atestado') }}</span>
+                                                            @elseif ($employee->pivot->absence)
+                                                                <span class="badge bg-secondary">{{ __('Abonado') }}</span>
+                                                            @elseif ($employee->pivot->vacation)
+                                                                <span class="badge bg-success">{{ __('Férias') }}</span>
+                                                            @elseif ($employee->pivot->dismissed)
+                                                                <span class="badge bg-dark">{{ __('Dispensado') }}</span>
                                                             @else
                                                                 {{ __('Não Preenchido') }}
                                                             @endif
@@ -106,6 +113,16 @@
                                                                 {{ date('H:i', strtotime($employee->pivot->clock_out)) }}
                                                             @elseif ($employee->pivot->missed)
                                                                 <span class="badge bg-danger">{{ __('Faltou') }}</span>
+                                                            @elseif ($employee->pivot->dsr)
+                                                                <span class="badge bg-info">{{ __('DSR') }}</span>
+                                                            @elseif ($employee->pivot->sick)
+                                                                <span class="badge bg-warning">{{ __('Atestado') }}</span>
+                                                            @elseif ($employee->pivot->absence)
+                                                                <span class="badge bg-secondary">{{ __('Abonado') }}</span>
+                                                            @elseif ($employee->pivot->vacation)
+                                                                <span class="badge bg-success">{{ __('Férias') }}</span>
+                                                            @elseif ($employee->pivot->dismissed)
+                                                                <span class="badge bg-dark">{{ __('Dispensado') }}</span>
                                                             @else
                                                                 {{ __('Não Preenchido') }}
                                                             @endif

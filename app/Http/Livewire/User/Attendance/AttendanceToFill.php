@@ -50,9 +50,14 @@ class AttendanceToFill extends Component
 
         $this->done = true;
 
+        if ($this->hasTrueOption()) {
+            $this->clock_in = null;
+            $this->clock_out = null;
+        }
+
         $data = array_merge([
-            'clock_in' => $this->hasTrueOption() ? null : $this->clock_in,
-            'clock_out' => $this->hasTrueOption() ? null : $this->clock_out,
+            'clock_in' => $this->clock_in,
+            'clock_out' => $this->clock_out,
             'done' => $this->done,
         ], $this->getOptionsData());
 
@@ -65,7 +70,9 @@ class AttendanceToFill extends Component
     public function setOption($selected)
     {
         foreach ($this->options as $option) {
-            $this->$option = $option === $selected;
+            if ($option !== $selected) {
+                $this->$option = $option === $selected;
+            }
         }
     }
 

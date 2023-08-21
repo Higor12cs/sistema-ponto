@@ -7,7 +7,6 @@ use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
-use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class DateRangeAttendanceExport implements FromQuery, WithMapping, WithHeadings, ShouldAutoSize
 {
@@ -46,6 +45,11 @@ class DateRangeAttendanceExport implements FromQuery, WithMapping, WithHeadings,
                 $employee->pivot->clock_in,
                 $employee->pivot->clock_out,
                 $employee->pivot->missed ? 'Sim' : 'Não',
+                $employee->pivot->dsr ? 'Sim' : 'Não',
+                $employee->pivot->sick ? 'Sim' : 'Não',
+                $employee->pivot->absence ? 'Sim' : 'Não',
+                $employee->pivot->vacation ? 'Sim' : 'Não',
+                $employee->pivot->dismissed ? 'Sim' : 'Não',
             ];
         }
 
@@ -64,6 +68,11 @@ class DateRangeAttendanceExport implements FromQuery, WithMapping, WithHeadings,
             'Entrada',
             'Saída',
             'Faltou',
+            'DSR',
+            'Atestado',
+            'Abonado',
+            'Férias',
+            'Dispensado',
         ];
     }
 

@@ -11,16 +11,13 @@
 
     <div class="card mb-4">
         <div class="card-header">
-            {{ __('Configurações') }}
+            {{ __('Data Limite de Pontos') }}
         </div>
         <div class="card-body">
-
-            <p class="fw-bold">{{ __('Data limite de pontos') }}</p>
-
-            <p>Os responsáveis poderão ver pontos de até quantos dias atrás?</p>
-
             <form action="{{ route('admin.configuration.set-user-attendance-display-limit') }}" method="POST">
                 @csrf
+                
+                <label class="form-label" for="number-of-days">{{ __('Os responsáveis poderão ver pontos de até quantos dias atrás?') }}</label>
 
                 <div class="input-group input-group mb-3">
                     <span class="input-group-text">Dias</span>
@@ -28,9 +25,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Salvar</button>
-
             </form>
-            
         </div>
     </div>
 @endsection
