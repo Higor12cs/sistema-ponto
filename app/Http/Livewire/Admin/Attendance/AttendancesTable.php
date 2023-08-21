@@ -68,7 +68,10 @@ class AttendancesTable extends DataTableComponent
                         ->keyBy('id')
                         ->map(fn ($tag) => $tag->name)
                         ->toArray()
-                ),
+                )
+                ->filter(function (Builder $builder, array $array) {
+                    $builder->whereIn('user_id', $array);
+                }),
             SelectFilter::make('Status')
                 ->options([
                     '' => 'Todos',
